@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'widget/loginWidget.dart';
 
-
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -12,17 +10,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   FocusNode? _emailFocusNode, _passwordFocusNode;
   final bool _isLoading = false;
+  bool _seePassword = false;
   @override
   initState() {
     super.initState();
-    _emailFocusNode =  FocusNode();
-    _passwordFocusNode =  FocusNode();
+    _emailFocusNode = FocusNode();
+    _passwordFocusNode = FocusNode();
   }
 
   @override
@@ -31,9 +29,10 @@ class _LoginPageState extends State<LoginPage> {
     _emailFocusNode!.dispose();
     _passwordFocusNode!.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-     return GestureDetector(
+    return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         body: loginWidget(
@@ -45,6 +44,12 @@ class _LoginPageState extends State<LoginPage> {
             passwordFocusNode: _passwordFocusNode,
             key: _formKey,
             context: context,
+            obsecureText: _seePassword,
+            changeob: () {
+              setState(() {
+                _seePassword = !_seePassword;
+              });
+            },
             isLoading: _isLoading),
       ),
     );

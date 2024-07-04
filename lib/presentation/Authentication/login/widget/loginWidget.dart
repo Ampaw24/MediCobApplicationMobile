@@ -19,6 +19,8 @@ Widget loginWidget({
   @required Key? key,
   required BuildContext? context,
   required bool isLoading,
+  bool? obsecureText,
+  void Function()? changeob,
 }) {
   return SingleChildScrollView(
     child: Form(
@@ -80,14 +82,18 @@ Widget loginWidget({
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: CustomTextFormField(
+                      obscureText: obsecureText,
                       hintText: "Enter password",
                       controller: passwordController,
                       focusNode: passwordFocusNode,
                       fillColor: WHITE,
                       hintStyle: subheaderText,
                       suffix: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Iconsax.eye),
+                        splashColor: PRIMARYLIGHT,
+                        onPressed: changeob,
+                        icon: obsecureText!
+                            ? const Icon(Iconsax.eye_slash)
+                            : const Icon(Iconsax.eye),
                       ),
                     ),
                   ),
@@ -133,7 +139,6 @@ Widget loginWidget({
                     child: button(
                       onPressed: () {
                         Navigator.of(context).push(CupertinoPageRoute(
-                          
                             builder: (context) => const RegisterPage()));
                       },
                       text: "Don't have an Account? Register",

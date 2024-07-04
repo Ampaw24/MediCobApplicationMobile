@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
-import 'textstyles.dart';
 import 'theme/custom_text_style.dart';
 import 'theme/theme_helper.dart';
 
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
+class CustomPasswordField extends StatelessWidget {
+  const CustomPasswordField({
     super.key,
     this.alignment,
     this.width,
@@ -91,6 +90,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget textFormFieldWidget(BuildContext context) => SizedBox(
         width: width ?? double.maxFinite,
         child: TextFormField(
+         
           textAlign: TextAlign.start,
           cursorHeight: 18,
           cursorColor: PRIMARYLIGHT,
@@ -99,7 +99,7 @@ class CustomTextFormField extends StatelessWidget {
           controller: controller,
           focusNode: focusNode ?? FocusNode(),
           autofocus: autofocus!,
-          style: textStyle ?? subheaderText,
+          style: textStyle ?? CustomTextStyles.headlineSmallPrimary,
           obscureText: obscureText!,
           textInputAction: textInputAction,
           keyboardType: textInputType,

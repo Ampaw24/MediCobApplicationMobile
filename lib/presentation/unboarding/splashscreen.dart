@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../core/image_constant.dart';
 import '../../core/progress_dialog_utils.dart';
 import '../Authentication/login/login.dart';
@@ -28,14 +27,16 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     SharedPreferences sp = await SharedPreferences.getInstance();
     bool? isLogin = sp.getBool('isLogin') ?? false;
     print(isLogin);
-    if (isLogin) {
+    if (isLogin) { 
       Timer(
           const Duration(seconds: 5),
           () => Navigator.of(context).pushReplacement(
               CupertinoPageRoute(builder: (context) => const LoginPage())));
     } else {
-      Navigator.of(context).pushReplacement(
-          CupertinoPageRoute(builder: (context) => const LoginPage()));
+      Timer(
+          const Duration(seconds: 5),
+          () => Navigator.of(context).pushReplacement(
+              CupertinoPageRoute(builder: (context) => const LoginPage()))); 
     }
   }
 

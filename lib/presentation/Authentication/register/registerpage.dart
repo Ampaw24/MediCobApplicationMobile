@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'widget/registerwidget.dart';
-
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _RegisterPageState createState() => _RegisterPageState();
 }
 
@@ -16,7 +15,7 @@ class _RegisterPageState extends State {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _firstnameController = TextEditingController();
-  final TextEditingController _surnameController = TextEditingController();
+  final TextEditingController surnameController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
@@ -29,6 +28,8 @@ class _RegisterPageState extends State {
   @override
   initState() {
     super.initState();
+    firstnameFocusNode = FocusNode();
+    surnameFocusNode = FocusNode();
     _emailFocusNode = FocusNode();
     _passwordFocusNode = FocusNode();
   }
@@ -36,6 +37,7 @@ class _RegisterPageState extends State {
   @override
   dispose() {
     _emailFocusNode!.dispose();
+    firstnameFocusNode!.dispose();
     _passwordFocusNode!.dispose();
     _confirmPasswordFocusNode!.dispose();
     super.dispose();
@@ -51,7 +53,7 @@ class _RegisterPageState extends State {
             emailFocusNode: _emailFocusNode,
             firstnameFocusNode: firstnameFocusNode,
             firstnameController: _firstnameController,
-            surnameController: _surnameController,
+            surnameController: surnameController,
             surnameFocusNode: surnameFocusNode,
             confirmPasswordController: _confirmPasswordController,
             confirmPasswordFocusNode: _confirmPasswordFocusNode,
@@ -67,7 +69,7 @@ class _RegisterPageState extends State {
       ),
     );
   }
-   
+
   // void _onRegister() async {
   //   if (_formKey.currentState!.validate()) {
   //     if (_passwordController.text != _confirmPasswordController.text) {
