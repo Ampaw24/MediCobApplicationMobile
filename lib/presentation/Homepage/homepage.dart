@@ -23,6 +23,15 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          splashColor: PRIMARYLIGHT,
+          elevation: 0,
+          backgroundColor: WHITE,
+          onPressed: () {},
+          child: Image.asset(
+            ImageConstant.robotLogo,
+            fit: BoxFit.cover,
+          )),
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
@@ -47,7 +56,6 @@ class _HomepageState extends State<Homepage> {
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: const Color(0xffF2F2F2),
@@ -180,13 +188,13 @@ class _HomepageState extends State<Homepage> {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
                   'by $author • $daysAgo days ago',
                   style: TextStyle(color: Colors.grey),
                 ),
-                Text(
+                const Text(
                   'Lorem ipsum dolor sit amet consectetur. Adipiscing sed lectus dolor congue.',
                   style: TextStyle(color: Colors.grey),
                 ),
