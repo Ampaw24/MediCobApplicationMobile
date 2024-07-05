@@ -5,4 +5,5 @@ class ImageConstant {
   static String logo = '$imagePath/medicoblogo.png';
   static String registerpersonal = '$imagePath/registerill.png';
   static String registerhealthimg = '$imagePath/registerhealth.png';
+  static String bannerBackground = '$imagePath/barbackground.png';
 }

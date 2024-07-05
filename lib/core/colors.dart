@@ -37,3 +37,10 @@ const BUTTONGRADIENT = LinearGradient(
       PRIMARYCOLOR,
       PRIMARYLIGHT,
     ]);
+final DEEPBUTTONGRADIENT = LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    colors: [
+      const Color(0xff2F648C),
+      const Color(0xff0D1B26).withOpacity(0.5),
+    ]);

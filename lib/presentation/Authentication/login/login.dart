@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Homepage/homepage.dart';
 import 'widget/loginWidget.dart';
 
 class LoginPage extends StatefulWidget {
@@ -39,7 +40,10 @@ class _LoginPageState extends State<LoginPage> {
             emailController: _emailController,
             emailFocusNode: _emailFocusNode,
             onForgetPassword: () {},
-            onLogin: () {},
+            onLogin: () {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => Homepage()));
+            },
             passwordController: _passwordController,
             passwordFocusNode: _passwordFocusNode,
             key: _formKey,
