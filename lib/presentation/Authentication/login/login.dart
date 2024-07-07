@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../Homepage/homepage.dart';
+import '../../../core/spec/buttomnavbar.dart';
 import 'widget/loginWidget.dart';
 
 class LoginPage extends StatefulWidget {
@@ -9,7 +8,6 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
-
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
@@ -42,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
             onForgetPassword: () {},
             onLogin: () {
               Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => Homepage()));
+                  context, MaterialPageRoute(builder: (context) => const BTNAV()));
             },
             passwordController: _passwordController,
             passwordFocusNode: _passwordFocusNode,

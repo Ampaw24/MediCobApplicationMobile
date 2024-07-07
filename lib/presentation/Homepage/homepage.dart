@@ -4,7 +4,6 @@ import 'package:newmedicob/core/image_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gap/gap.dart';
 import 'package:newmedicob/core/textstyles.dart';
-import 'package:iconsax/iconsax.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -12,20 +11,12 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          splashColor: PRIMARYLIGHT,
-          elevation: 0,
+          splashColor: PRIMARYLIGHT.withOpacity(0.3),
+          elevation: 4,
           backgroundColor: WHITE,
           onPressed: () {},
           child: Image.asset(
@@ -52,31 +43,6 @@ class _HomepageState extends State<Homepage> {
               _buildRecommendationTopics(),
             ],
           ),
-        ),
-      ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: const Color(0xffF2F2F2),
-          elevation: 5,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.home),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.note_2),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.profile_circle),
-              label: '',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.blue,
-          onTap: _onItemTapped,
         ),
       ),
     );
