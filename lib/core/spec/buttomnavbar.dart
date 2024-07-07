@@ -40,6 +40,7 @@ class BTNAV extends StatelessWidget {
       confineInSafeArea: false,
       backgroundColor: WHITE,
       handleAndroidBackButtonPress: true,
+      padding: const NavBarPadding.all(15),
       resizeToAvoidBottomInset: true,
       stateManagement: false,
       hideNavigationBarWhenKeyboardShows: true,
