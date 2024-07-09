@@ -65,8 +65,8 @@ class BTNAV extends StatelessWidget {
   List<Widget> _buildScreens() {
     return [
       Homepage(),
-      const ProfilePage(),
       const RecordsPage(),
+      const ProfilePage(),
     ];
   }
 }

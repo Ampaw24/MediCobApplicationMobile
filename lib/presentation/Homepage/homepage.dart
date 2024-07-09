@@ -14,6 +14,31 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leadingWidth: 85,
+        leading: Container(
+            margin: const EdgeInsets.only(left: 20, top: 15),
+            child: Image.asset(ImageConstant.logo)),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Hello Safo",
+              style: GoogleFonts.poppins(
+                  color: PRIMARYCOLOR,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700),
+            ),
+            Text(
+              "May you always be healthy",
+              style: GoogleFonts.poppins(
+                  color: PRIMARYLIGHT,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300),
+            )
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
           splashColor: PRIMARYLIGHT.withOpacity(0.3),
           elevation: 4,
@@ -24,25 +49,15 @@ class _HomepageState extends State<Homepage> {
             fit: BoxFit.cover,
           )),
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: const Text(
-          'Hi, Safo\nMay you always be healthy',
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildBMISection(),
-              const SizedBox(height: 16),
-              _buildRecommendationTopics(),
-            ],
-          ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildBMISection(),
+            const SizedBox(height: 16),
+            _buildRecommendationTopics(),
+          ],
         ),
       ),
     );
@@ -93,42 +108,11 @@ class _HomepageState extends State<Homepage> {
   }
 
   Widget _buildRecommendationTopics() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'Recommendation Topics',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: const Text('View all'),
-            ),
-          ],
-        ),
-        _buildRecommendationItem(
-          title: 'How to burn calories effectively',
-          author: 'Dr. Edward Quainoio',
-          daysAgo: 4,
-          imageUrl: 'https://via.placeholder.com/100',
-        ),
-        _buildRecommendationItem(
-          title: '6 Ways to have the best shape',
-          author: 'Dr. Qhobbie Junior',
-          daysAgo: 4,
-          imageUrl: 'https://via.placeholder.com/100',
-        ),
-        _buildRecommendationItem(
-          title: 'How to burn calories effectively',
-          author: 'Dr. Edward Quainoio',
-          daysAgo: 4,
-          imageUrl: 'https://via.placeholder.com/100',
-        ),
-      ],
-    );
+    return _buildRecommendationItem(
+        title: 'Hello',
+        author: "Safo Ampaw",
+        imageUrl: ImageConstant.robotLogo,
+        daysAgo: 2);
   }
 
   Widget _buildRecommendationItem({
@@ -136,39 +120,53 @@ class _HomepageState extends State<Homepage> {
     required String author,
     required int daysAgo,
     required String imageUrl,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          Image.network(
-            imageUrl,
-            width: 60,
-            height: 60,
-            fit: BoxFit.cover,
+  }) =>
+      Card(
+        elevation: 3.0,
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 150,
+          decoration: BoxDecoration(
+              color: WHITE, borderRadius: BorderRadius.circular(10)),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.only(left: 20),
+                width: MediaQuery.of(context).size.width * 0.6,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Gap(10),
+                    Text(
+                      "Title goes here",
+                      style: GoogleFonts.poppins(
+                          color: PRIMARYCOLOR,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20),
+                    ),
+                    const Gap(5),
+                    Text(
+                      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum molestiae qui, voluptas corporis placeat facilis quaerat. Ex dolorum ullam hic corporis exercitationem laborum repellat repellendus consequuntur quos itaque! Fugit, molestias.",
+                      style: GoogleFonts.poppins(
+                          color: rederPurpDeep,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.3,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(ImageConstant.registerhealthimg),
+                        fit: BoxFit.contain),
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+            ],
           ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'by $author • $daysAgo days ago',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                const Text(
-                  'Lorem ipsum dolor sit amet consectetur. Adipiscing sed lectus dolor congue.',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      );
 }

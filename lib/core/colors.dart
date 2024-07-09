@@ -30,6 +30,8 @@ const GREY = Color(0xffE0E0E0);
 const DEEPGREY = Color(0xff999999);
 const TRANSPARENT = Colors.transparent;
 const AMBER = Color(0xffEDB200);
+const rederPurp = Color(0xff8A6CDE);
+const rederPurpDeep = Color(0xff5B4A8C);
 const BUTTONGRADIENT = LinearGradient(
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
