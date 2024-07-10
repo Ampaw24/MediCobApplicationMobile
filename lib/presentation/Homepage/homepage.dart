@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:newmedicob/core/colors.dart';
 import 'package:newmedicob/core/image_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gap/gap.dart';
 import 'package:newmedicob/core/textstyles.dart';
+import 'package:newmedicob/presentation/diagnosis/widget/diagnosisloader.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -43,7 +45,9 @@ class _HomepageState extends State<Homepage> {
           splashColor: PRIMARYLIGHT.withOpacity(0.3),
           elevation: 4,
           backgroundColor: WHITE,
-          onPressed: () {},
+          onPressed: () {
+            Get.to(transition: Transition.downToUp, DiagnosisLoaderPage());
+          },
           child: Image.asset(
             ImageConstant.robotLogo,
             fit: BoxFit.cover,
