@@ -7,14 +7,13 @@ import '../../../../core/colors.dart';
 import '../../../../core/image_constant.dart';
 import '../../../../core/textstyles.dart';
 
-Widget PersonalFormWidget({
-  @required TextEditingController? heightController,
-  @required TextEditingController? weightController,
-  @required TextEditingController? firstnameController,
-  @required TextEditingController? nhisController,
-  @required TextEditingController? genderController,
-  @required TextEditingController? bloodGroupController,
-  @required TextEditingController? genoTypeController,
+Widget SymptomFormWidget({
+  @required TextEditingController? symptomTypeController,
+  @required TextEditingController? durationController,
+  @required TextEditingController? frequencyController,
+  @required TextEditingController? triggerController,
+  @required TextEditingController? notesController,
+  @required TextEditingController? levelController,
   @required FocusNode? heightFocusNode,
   @required FocusNode? weightFocusNode,
   @required FocusNode? firstnameFocusNode,
@@ -28,7 +27,11 @@ Widget PersonalFormWidget({
   required BuildContext? context,
   required bool isLoading,
 }) {
-  List<String> genderOptions = ['Male', 'Female', 'Other'];
+  List<String> genderOptions = [
+    "daily",
+    "weekly",
+    "Monthly",
+  ];
   List<String> bloodGroupOptions = [
     'A+',
     'A-',
@@ -65,64 +68,18 @@ Widget PersonalFormWidget({
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "Personal Details",
+                  "Symptom Details",
                   style: headerText,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "Register Patients Details",
+                  "Tell us how you are feeling",
                   style: subheaderText,
                 ),
               ),
               const Gap(5),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 7),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Patient Full Name",
-                    style: subheaderText,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: CustomTextFormField(
-                  suffix: const Icon(Iconsax.user),
-                  hintText: "Name",
-                  controller: firstnameController,
-                  focusNode: firstnameFocusNode,
-                  fillColor: WHITE,
-                  hintStyle: subheaderText,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 7),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "NHIS ID",
-                    style: subheaderText,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: CustomTextFormField(
-                  suffix: const Icon(Iconsax.personalcard),
-                  autofocus: false,
-                  hintText: "NHIS Card Number",
-                  controller: nhisController,
-                  focusNode: nhisFocusNode,
-                  fillColor: WHITE,
-                  hintStyle: subheaderText,
-                ),
-              ),
               const SizedBox(height: 10),
               Row(
                 children: [
@@ -136,7 +93,7 @@ Widget PersonalFormWidget({
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Height(m)",
+                              "Height",
                               style: subheaderText,
                             ),
                           ),
@@ -146,7 +103,7 @@ Widget PersonalFormWidget({
                           child: CustomTextFormField(
                             autofocus: false,
                             hintText: "Choose Height",
-                            controller: heightController,
+                            controller: symptomTypeController,
                             focusNode: heightFocusNode,
                             fillColor: WHITE,
                             hintStyle: subheaderText,
@@ -157,10 +114,11 @@ Widget PersonalFormWidget({
                                   icon: const Icon(Iconsax.minus),
                                   onPressed: () {
                                     int currentValue = int.tryParse(
-                                            heightController?.text ?? '0') ??
+                                            symptomTypeController?.text ??
+                                                '0') ??
                                         0;
                                     if (currentValue > 0) {
-                                      heightController?.text =
+                                      symptomTypeController?.text =
                                           (currentValue - 1).toString();
                                     }
                                   },
@@ -169,9 +127,10 @@ Widget PersonalFormWidget({
                                   icon: const Icon(Iconsax.add),
                                   onPressed: () {
                                     int currentValue = int.tryParse(
-                                            heightController?.text ?? '0') ??
+                                            symptomTypeController?.text ??
+                                                '0') ??
                                         0;
-                                    heightController?.text =
+                                    symptomTypeController?.text =
                                         (currentValue + 1).toString();
                                   },
                                 ),
@@ -193,7 +152,7 @@ Widget PersonalFormWidget({
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Weight(Kg)",
+                              "Weight",
                               style: subheaderText,
                             ),
                           ),
@@ -203,37 +162,10 @@ Widget PersonalFormWidget({
                           child: CustomTextFormField(
                             autofocus: false,
                             hintText: "Weight",
-                            controller: weightController,
+                            controller: durationController,
                             focusNode: weightFocusNode,
                             fillColor: WHITE,
                             hintStyle: subheaderText,
-                            suffix: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Iconsax.minus),
-                                  onPressed: () {
-                                    double weightcurrentValue = double.tryParse(
-                                            weightController?.text ?? '0') ??
-                                        0;
-                                    if (weightcurrentValue > 0) {
-                                      weightController?.text =
-                                          (weightcurrentValue - 1).toString();
-                                    }
-                                  },
-                                ),
-                                IconButton(
-                                  icon: const Icon(Iconsax.add),
-                                  onPressed: () {
-                                    double weightcurrentValue = double.tryParse(
-                                            weightController?.text ?? '0') ??
-                                        0;
-                                    weightController?.text =
-                                        (weightcurrentValue + 0.5).toString();
-                                  },
-                                ),
-                              ],
-                            ),
                           ),
                         ),
                       ],
@@ -276,11 +208,11 @@ Widget PersonalFormWidget({
                               'Choose Blood Type',
                               style: subheaderText,
                             ),
-                            value: bloodGroupController?.text.isNotEmpty == true
-                                ? bloodGroupController?.text
+                            value: levelController?.text.isNotEmpty == true
+                                ? levelController?.text
                                 : null,
                             onChanged: (String? newValue) {
-                              bloodGroupController?.text = newValue!;
+                              levelController?.text = newValue!;
                             },
                             items: bloodGroupOptions
                                 .map<DropdownMenuItem<String>>((String value) {
@@ -327,11 +259,11 @@ Widget PersonalFormWidget({
                               'Choose Genotype',
                               style: subheaderText,
                             ),
-                            value: genoTypeController?.text.isNotEmpty == true
-                                ? genoTypeController?.text
+                            value: levelController?.text.isNotEmpty == true
+                                ? levelController?.text
                                 : null,
                             onChanged: (String? newValue) {
-                              genoTypeController?.text = newValue!;
+                              levelController?.text = newValue!;
                             },
                             items: genotypeOptions
                                 .map<DropdownMenuItem<String>>((String value) {
@@ -376,11 +308,11 @@ Widget PersonalFormWidget({
                     'Choose Gender',
                     style: subheaderText,
                   ),
-                  value: genderController?.text.isNotEmpty == true
-                      ? genderController?.text
+                  value: notesController?.text.isNotEmpty == true
+                      ? notesController?.text
                       : null,
                   onChanged: (String? newValue) {
-                    genderController?.text = newValue!;
+                    notesController?.text = newValue!;
                   },
                   items: genderOptions
                       .map<DropdownMenuItem<String>>((String value) {
@@ -401,7 +333,7 @@ Widget PersonalFormWidget({
                   child: button(
                     buttonRadius: 10,
                     height: 55,
-                    onPressed: onRegister,
+                    onPressed: (() => onRegister!()),
                     text: "Continue",
                     color: Colors.transparent,
                     context: context,
