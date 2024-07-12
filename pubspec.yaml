@@ -38,7 +38,11 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   get: ^4.6.6
   dropdown_search: ^5.0.6
-
+  flutter_spinkit: any
+  shared_preferences: any
+  iconsax: any
+  google_fonts: any
+  gap: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -48,9 +52,7 @@ dev_dependencies:
   provider: ^6.1.2
   connectivity_plus: ^6.0.3
   flutter_spinkit: ^5.2.1
-  google_fonts: ^6.2.1
-  iconsax: ^0.0.8
-  gap: ^3.0.1
+  google_fonts: ^6.2.1iconsax: ^0.0.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

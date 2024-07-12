@@ -25,7 +25,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   void loginsessionUser() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     bool? isLogin = sp.getBool('isLogin') ?? false;
-    print(isLogin);
+
     if (isLogin) { 
       Timer(
           const Duration(seconds: 5),

@@ -18,6 +18,7 @@ analyzer:
     non_constant_identifier_names: ignore
     prefer_const_constructors: ignore
     use_key_in_widget_constructors: ignore
+    use_super_parameters: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

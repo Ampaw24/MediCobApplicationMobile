@@ -33,7 +33,6 @@ class profilewidget extends StatelessWidget {
       leading: Container(
         height: isIcon ? 30 : 55,
         width: isCircular ? 55 : 65,
-        child: isIcon ? icon : Container(),
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(
@@ -42,6 +41,7 @@ class profilewidget extends StatelessWidget {
                 fit: BoxFit.contain),
             color: color,
             shape: isCircular ? BoxShape.circle : BoxShape.rectangle),
+        child: isIcon ? icon : Container(),
       ),
       title: Text(
         userName,
@@ -87,7 +87,7 @@ class profilewidgetIcon extends StatelessWidget {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 20),
       onTap: tap,
-      leading: Container(
+      leading: SizedBox(
           height: isIcon ? 30 : 55, width: isCircular ? 55 : 65, child: icon),
       title: Text(
         userName,
