@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/presentation/diagnosis/provider/diagnosisprovider.dart';
-import 'package:newmedicob/presentation/diagnosis/symptomspage_doctor.dart';
-import 'package:newmedicob/presentation/diagnosis/widget/symptoms_widget.dart';
+import 'package:newmedicob/presentation/diagnosis/widget/symptomspage_doctor_widget.dart';
 
-class SymptomsFormDiagnosis extends StatefulWidget {
-  const SymptomsFormDiagnosis({super.key});
+class SymptomsFormDiagnosisDoctor extends StatefulWidget {
+  const SymptomsFormDiagnosisDoctor({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -17,29 +15,27 @@ class _SymptomsFormDiagnosisState extends State {
   final bool _isLoading = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  FocusNode? symptomTypeFocusNode,
-      levelFocusNode,
-      durationFocusNode,
-      frequencyFocusNode,
-      triggerFocusNode,
+  FocusNode? relieveMeasuresFocusNode,
+      locationFocusNode,
+      moodOrEmotionsFocusNode,
       notesFocusNode;
 
   @override
   void initState() {
     super.initState();
-    symptomTypeFocusNode = FocusNode();
-    durationFocusNode = FocusNode();
-    frequencyFocusNode = FocusNode();
-    triggerFocusNode = FocusNode();
+    relieveMeasuresFocusNode = FocusNode();
+    locationFocusNode = FocusNode();
+    moodOrEmotionsFocusNode = FocusNode();
+    locationFocusNode = FocusNode();
     notesFocusNode = FocusNode();
   }
 
   @override
   void dispose() {
-    symptomTypeFocusNode!.dispose();
-    durationFocusNode!.dispose();
-    frequencyFocusNode!.dispose();
-    triggerFocusNode!.dispose();
+    relieveMeasuresFocusNode!.dispose();
+    locationFocusNode!.dispose();
+    moodOrEmotionsFocusNode!.dispose();
+    locationFocusNode!.dispose();
     notesFocusNode!.dispose();
     super.dispose();
   }
@@ -50,23 +46,14 @@ class _SymptomsFormDiagnosisState extends State {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        body: SymptomFormWidget(
-            onForgetPassword: () {},
-            durationController: diagnosisProvider.durationController,
-            durationFocusNode: durationFocusNode,
-            frequencyController: diagnosisProvider.frequencyController,
-            frequencyFocusNode: frequencyFocusNode,
-            levelController: diagnosisProvider.levelController,
-            levelFocusNode: levelFocusNode,
-            notesController: diagnosisProvider.notesController,
-            notesFocusNode: notesFocusNode,
-            onRegister: () {
-              Get.to(SymptomsFormDiagnosisDoctor());
-            },
-            symptomTypeController: diagnosisProvider.symptomTypeController,
-            symptomsFocusNode: symptomTypeFocusNode,
-            triggerController: diagnosisProvider.triggerController,
-            triggerFocusNode: triggerFocusNode,
+        body: SymptomDetailsDoctor(
+          locationController: diagnosisProvider.locationController,
+          locationFocusNode: locationFocusNode,
+          moodOrEmotionsController: diagnosisProvider.moodOrEmotionController,
+          moodOrEmotionsFocusNode: moodOrEmotionsFocusNode,
+          relieveMeasuresController: diagnosisProvider.reliefMeasureController,
+          relieveMeasuresFocusNode: relieveMeasuresFocusNode,
+            onRegister: () {},
             key: _formKey,
             context: context,
             isLoading: _isLoading),
