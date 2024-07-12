@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/presentation/diagnosis/provider/diagnosisprovider.dart';
 import 'package:newmedicob/presentation/diagnosis/widget/personalwidget_form.dart';
+import 'package:newmedicob/presentation/diagnosis/widget/symptoms_widget.dart';
 
 class SymptomsFormDiagnosis extends StatefulWidget {
   const SymptomsFormDiagnosis({super.key});
@@ -16,6 +17,7 @@ class _SymptomsFormDiagnosisState extends State {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   FocusNode? symptomTypeFocusNode,
+     levelFocusNode,
       durationFocusNode,
       frequencyFocusNode,
       triggerFocusNode,
@@ -47,16 +49,21 @@ class _SymptomsFormDiagnosisState extends State {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        body: PersonalFormWidget(
-            heightController: diagnosisProvider.heightController,
-            weightController: diagnosisProvider.weightController,
-            bloodGroupController: diagnosisProvider.bloodTypeController,
-            firstnameController: diagnosisProvider.fullnameController,
-            genderController: diagnosisProvider.genderController,
-            genoTypeController: diagnosisProvider.genotypeController,
-            nhisController: diagnosisProvider.nhisidController,
+        body: SymptomFormWidget(
             onForgetPassword: () {},
-            onRegister: () {},
+            durationController: diagnosisProvider.durationController,
+            durationFocusNode: durationFocusNode,
+            frequencyController: diagnosisProvider.frequencyController,
+            frequencyFocusNode: frequencyFocusNode,
+            levelController: diagnosisProvider.levelController,
+            levelFocusNode: levelFocusNode,
+            notesController: diagnosisProvider.notesController,
+            notesFocusNode: notesFocusNode,
+            onRegister: (){},
+            symptomTypeController: diagnosisProvider.symptomTypeController,
+            symptomsFocusNode: symptomTypeFocusNode,
+            triggerController: diagnosisProvider.triggerController,
+            triggerFocusNode: triggerFocusNode,
             key: _formKey,
             context: context,
             isLoading: _isLoading),

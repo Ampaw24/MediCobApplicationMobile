@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newmedicob/core/custom_text_form_field.dart';
+import 'package:newmedicob/presentation/diagnosis/symptomsform.dart';
 import '../../../../core/button.dart';
 import '../../../../core/colors.dart';
 import '../../../../core/image_constant.dart';
@@ -401,7 +403,9 @@ Widget PersonalFormWidget({
                   child: button(
                     buttonRadius: 10,
                     height: 55,
-                    onPressed: onRegister,
+                    onPressed: () {
+                      Get.to(SymptomsFormDiagnosis());
+                    },
                     text: "Continue",
                     color: Colors.transparent,
                     context: context,

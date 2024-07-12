@@ -14,35 +14,56 @@ Widget SymptomFormWidget({
   @required TextEditingController? triggerController,
   @required TextEditingController? notesController,
   @required TextEditingController? levelController,
-  @required FocusNode? heightFocusNode,
-  @required FocusNode? weightFocusNode,
-  @required FocusNode? firstnameFocusNode,
-  @required FocusNode? nhisFocusNode,
-  @required FocusNode? genderFocusNode,
-  @required FocusNode? bloodGroupFocusNode,
-  @required FocusNode? genotypeGroupFocusNode,
+  @required FocusNode? symptomsFocusNode,
+  @required FocusNode? durationFocusNode,
+  @required FocusNode? frequencyFocusNode,
+  @required FocusNode? triggerFocusNode,
+  @required FocusNode? notesFocusNode,
+  @required FocusNode? levelFocusNode,
   @required void Function()? onRegister,
   @required void Function()? onForgetPassword,
   @required Key? key,
   required BuildContext? context,
   required bool isLoading,
 }) {
-  List<String> genderOptions = [
-    "daily",
-    "weekly",
-    "Monthly",
+  List<String> symptomType = [
+    "Headache",
+    "Cough",
+    "Fever",
+    "Sore throat",
+    "Runny nose",
+    "Shortness of breath",
+    "Diarrhea",
+    "Vomiting",
+    "Rash",
+    "Muscle aches",
+    "Chills",
+    "Loss of taste or smell",
+    "Other (please specify)"
   ];
-  List<String> bloodGroupOptions = [
-    'A+',
-    'A-',
-    'B+',
-    'B-',
-    'AB+',
-    'AB-',
-    'O+',
-    'O-'
+  List<String> triggerList = [
+    "Food",
+    "Stress",
+    "Weather",
+    "Medication",
+    "Exercise",
+    "Injury",
+    "Illness",
+    "Travel",
+    "Sleep",
+    "Alcohol",
+    "Caffeine",
+    "Dehydration",
+    "Sensory overload (noise, lights, crowds)",
+    "Emotional state (anxiety, anger, sadness)"
   ];
-  List<String> genotypeOptions = ['AA', 'AS', 'SS', 'AC', 'SC'];
+  List<String> frequentList = [
+    'Daily',
+    'Weekly',
+    'Monthly',
+    'Annual',
+    'New Signs'
+  ];
 
   return SingleChildScrollView(
     child: Form(
@@ -79,7 +100,52 @@ Widget SymptomFormWidget({
                   style: subheaderText,
                 ),
               ),
-              const Gap(5),
+              const Gap(10),
+              //symptom type here
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 7),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Symptom Type",
+                    style: subheaderText,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    filled: true,
+                    fillColor: WHITE,
+                    hintStyle: subheaderText,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  hint: Text(
+                    ' Symptom ',
+                    style: subheaderText,
+                  ),
+                  value: symptomTypeController?.text.isNotEmpty == true
+                      ? symptomTypeController?.text
+                      : null,
+                  onChanged: (String? newValue) {
+                    symptomTypeController?.text = newValue!;
+                  },
+                  items:
+                      symptomType.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ),
+
               const SizedBox(height: 10),
               Row(
                 children: [
@@ -93,7 +159,7 @@ Widget SymptomFormWidget({
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Height",
+                              "Level (1-10)",
                               style: subheaderText,
                             ),
                           ),
@@ -102,9 +168,9 @@ Widget SymptomFormWidget({
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: CustomTextFormField(
                             autofocus: false,
-                            hintText: "Choose Height",
-                            controller: symptomTypeController,
-                            focusNode: heightFocusNode,
+                            hintText: "Pain Level",
+                            controller: levelController,
+                            focusNode: levelFocusNode,
                             fillColor: WHITE,
                             hintStyle: subheaderText,
                             suffix: Row(
@@ -114,11 +180,10 @@ Widget SymptomFormWidget({
                                   icon: const Icon(Iconsax.minus),
                                   onPressed: () {
                                     int currentValue = int.tryParse(
-                                            symptomTypeController?.text ??
-                                                '0') ??
+                                            levelController?.text ?? '0') ??
                                         0;
                                     if (currentValue > 0) {
-                                      symptomTypeController?.text =
+                                      levelController?.text =
                                           (currentValue - 1).toString();
                                     }
                                   },
@@ -127,11 +192,12 @@ Widget SymptomFormWidget({
                                   icon: const Icon(Iconsax.add),
                                   onPressed: () {
                                     int currentValue = int.tryParse(
-                                            symptomTypeController?.text ??
-                                                '0') ??
+                                            levelController?.text ?? '0') ??
                                         0;
-                                    symptomTypeController?.text =
-                                        (currentValue + 1).toString();
+                                    if (currentValue != 10) {
+                                      levelController?.text =
+                                          (currentValue + 1).toString();
+                                    }
                                   },
                                 ),
                               ],
@@ -152,7 +218,7 @@ Widget SymptomFormWidget({
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Weight",
+                              "Duration (hr)",
                               style: subheaderText,
                             ),
                           ),
@@ -161,11 +227,39 @@ Widget SymptomFormWidget({
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: CustomTextFormField(
                             autofocus: false,
-                            hintText: "Weight",
+                            hintText: "Pain Time",
                             controller: durationController,
-                            focusNode: weightFocusNode,
+                            focusNode: durationFocusNode,
                             fillColor: WHITE,
                             hintStyle: subheaderText,
+                            suffix: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Iconsax.minus),
+                                  onPressed: () {
+                                    int durationValue = int.tryParse(
+                                            durationController?.text ?? '0') ??
+                                        0;
+                                    if (durationValue > 0) {
+                                      durationController?.text =
+                                          (durationValue - 1).toString();
+                                    }
+                                  },
+                                ),
+                                IconButton(
+                                  icon: const Icon(Iconsax.add),
+                                  onPressed: () {
+                                    int durationValue = int.tryParse(
+                                            durationController?.text ?? '0') ??
+                                        0;
+
+                                    durationController?.text =
+                                        (durationValue + 1).toString();
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -174,119 +268,14 @@ Widget SymptomFormWidget({
                 ],
               ),
               const SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 25, vertical: 7),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Blood Type",
-                              style: subheaderText,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: DropdownButtonFormField<String>(
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
-                              filled: true,
-                              fillColor: WHITE,
-                              hintStyle: subheaderText,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            hint: Text(
-                              'Choose Blood Type',
-                              style: subheaderText,
-                            ),
-                            value: levelController?.text.isNotEmpty == true
-                                ? levelController?.text
-                                : null,
-                            onChanged: (String? newValue) {
-                              levelController?.text = newValue!;
-                            },
-                            items: bloodGroupOptions
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 25, vertical: 7),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Genotype",
-                              style: subheaderText,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: DropdownButtonFormField<String>(
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
-                              filled: true,
-                              fillColor: WHITE,
-                              hintStyle: subheaderText,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            hint: Text(
-                              'Choose Genotype',
-                              style: subheaderText,
-                            ),
-                            value: levelController?.text.isNotEmpty == true
-                                ? levelController?.text
-                                : null,
-                            onChanged: (String? newValue) {
-                              levelController?.text = newValue!;
-                            },
-                            items: genotypeOptions
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
+
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 7),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Gender",
+                    "Frequency",
                     style: subheaderText,
                   ),
                 ),
@@ -305,22 +294,96 @@ Widget SymptomFormWidget({
                     ),
                   ),
                   hint: Text(
-                    'Choose Gender',
+                    'Select How Frequent.',
                     style: subheaderText,
                   ),
-                  value: notesController?.text.isNotEmpty == true
-                      ? notesController?.text
+                  value: frequencyController?.text.isNotEmpty == true
+                      ? frequencyController?.text
                       : null,
                   onChanged: (String? newValue) {
-                    notesController?.text = newValue!;
+                    frequencyController?.text = newValue!;
                   },
-                  items: genderOptions
+                  items: frequentList
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
                     );
                   }).toList(),
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 7),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Trigger",
+                    style: subheaderText,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    filled: true,
+                    fillColor: WHITE,
+                    hintStyle: subheaderText,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  hint: Text(
+                    'Trigger',
+                    style: subheaderText,
+                  ),
+                  value: triggerController?.text.isNotEmpty == true
+                      ? triggerController?.text
+                      : null,
+                  onChanged: (String? newValue) {
+                    triggerController?.text = newValue!;
+                  },
+                  items:
+                      triggerList.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ),
+              const Gap(10),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 7),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Notes(Patients Additional Symptoms Check)",
+                    style: subheaderText,
+                  ),
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: CustomTextFormField(
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  autofocus: false,
+                  hintText: "Additional Notes",
+                  controller: notesController,
+                  focusNode: durationFocusNode,
+                  fillColor: WHITE,
+                  hintStyle: subheaderText,
                 ),
               ),
               Padding(

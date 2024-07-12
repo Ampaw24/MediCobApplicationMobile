@@ -66,12 +66,7 @@ class _PersonalFormDiagnosisState extends State {
             genoTypeController: diagnosisProvider.genotypeController,
             nhisController: diagnosisProvider.nhisidController,
             onForgetPassword: () {},
-            onRegister: () {
-              Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                      builder: (context) => SymptomsFormDiagnosis()));
-            },
+            onRegister: _onRegister,
             key: _formKey,
             context: context,
             isLoading: _isLoading),
@@ -79,9 +74,8 @@ class _PersonalFormDiagnosisState extends State {
     );
   }
 
-  // void _onRegister() async {
-  //   if (_formKey.currentState!.validate()) {
-  //    Navigator
-  //   }
-  // }
+  void _onRegister() async {
+    Navigator.push(context,
+        CupertinoPageRoute(builder: (context) => SymptomsFormDiagnosis()));
+  }
 }
