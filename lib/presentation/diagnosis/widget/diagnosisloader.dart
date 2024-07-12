@@ -26,8 +26,7 @@ class _DiagnosisLoaderPageState extends State<DiagnosisLoaderPage> {
   void loginsessionUser() async {
     Timer(
         const Duration(seconds: 5),
-        () => Get.to(
-            transition: Transition.circularReveal, PersonalFormDiagnosis()));
+        () => Get.to(transition: Transition.circularReveal, PersonalFormDiagnosis()));
   }
 
   @override

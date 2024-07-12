@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/presentation/Authentication/provider/authentication_provider.dart';
+import 'package:newmedicob/presentation/diagnosis/provider/diagnosisprovider.dart';
 import 'core/theme/theme_helper.dart';
 import 'presentation/unboarding/splashscreen.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
+        ChangeNotifierProvider(create: (context) => DiagnosisProvider()),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

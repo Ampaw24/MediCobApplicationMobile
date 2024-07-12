@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:newmedicob/core/app_export.dart';
+import 'package:newmedicob/presentation/diagnosis/provider/diagnosisprovider.dart';
 import 'package:newmedicob/presentation/diagnosis/widget/personalwidget_form.dart';
 
 class PersonalFormDiagnosis extends StatefulWidget {
@@ -12,12 +14,6 @@ class PersonalFormDiagnosis extends StatefulWidget {
 class _PersonalFormDiagnosisState extends State {
   final bool _isLoading = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _firstnameController = TextEditingController();
-  final TextEditingController surnameController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
 
   FocusNode? _emailFocusNode,
       _passwordFocusNode,
@@ -45,24 +41,21 @@ class _PersonalFormDiagnosisState extends State {
 
   @override
   Widget build(BuildContext context) {
+    final diagnosisProvider = context.read<DiagnosisProvider>();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         body: PersonalFormWidget(
-            emailController: _emailController,
-            emailFocusNode: _emailFocusNode,
+            heightController: diagnosisProvider.heightController,
+            weightController: diagnosisProvider.heightController,
+            bloodGroupController: diagnosisProvider.bloodTypeController,
             firstnameFocusNode: firstnameFocusNode,
-            firstnameController: _firstnameController,
-            surnameController: surnameController,
-            surnameFocusNode: surnameFocusNode,
-            confirmPasswordController: _confirmPasswordController,
-            confirmPasswordFocusNode: _confirmPasswordFocusNode,
-            PasswordController: _passwordController,
-            PasswordFocusNode: _passwordFocusNode,
+            firstnameController: diagnosisProvider.fullnameController,
+            genderController: diagnosisProvider.genderController,
+            genoTypeController: diagnosisProvider.genotypeController,
+            nhisController: diagnosisProvider.nhisidController,
             onForgetPassword: () {},
             onRegister: () {},
-            passwordController: _passwordController,
-            passwordFocusNode: _passwordFocusNode,
             key: _formKey,
             context: context,
             isLoading: _isLoading),
