@@ -377,11 +377,11 @@ Widget SymptomFormWidget({
                 ),
                 child: CustomTextFormField(
                   contentPadding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                      const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
                   autofocus: false,
                   hintText: "Additional Notes",
                   controller: notesController,
-                  focusNode: durationFocusNode,
+                  focusNode: notesFocusNode,
                   fillColor: WHITE,
                   hintStyle: subheaderText,
                 ),

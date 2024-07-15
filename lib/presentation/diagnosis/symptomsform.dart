@@ -60,9 +60,7 @@ class _SymptomsFormDiagnosisState extends State {
             levelFocusNode: levelFocusNode,
             notesController: diagnosisProvider.notesController,
             notesFocusNode: notesFocusNode,
-            onRegister: () {
-              Get.to(SymptomsFormDiagnosisDoctor());
-            },
+            onRegister: () => Get.to(SymptomsFormDiagnosisDoctor()),
             symptomTypeController: diagnosisProvider.symptomTypeController,
             symptomsFocusNode: symptomTypeFocusNode,
             triggerController: diagnosisProvider.triggerController,
