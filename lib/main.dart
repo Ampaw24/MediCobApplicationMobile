@@ -1,12 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:newmedicob/core/app_export.dart';
+import 'package:newmedicob/firebase_options.dart';
 import 'package:newmedicob/presentation/Authentication/provider/authentication_provider.dart';
 import 'package:newmedicob/presentation/diagnosis/provider/diagnosisprovider.dart';
 import 'core/theme/theme_helper.dart';
 import 'presentation/unboarding/splashscreen.dart';
 
 Future<void> main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
   runApp(const MyApp());

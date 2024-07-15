@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "900476203430",
+    "project_id": "newmedicobmobile",
+    "storage_bucket": "newmedicobmobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:900476203430:android:d34cce562463b1a82a9f67",
+        "android_client_info": {
+          "package_name": "com.example.newmedicob"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6g7ER7fJPT9RifLNWdpQQjVdEVcQaumg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
