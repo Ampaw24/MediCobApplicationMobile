@@ -5,4 +5,6 @@ class AuthenticationProvider extends ChangeNotifier {
     obsecureBool = !obsecureBool;
     notifyListeners();
   }
+
+
 }
