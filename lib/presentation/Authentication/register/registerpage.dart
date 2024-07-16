@@ -1,13 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/core/network/firebase_provider.dart';
-import 'package:newmedicob/core/spec/toastcontainer.dart';
 import 'package:newmedicob/presentation/Authentication/login/login.dart';
-import '../../../core/progress_dialog_utils.dart';
 import 'widget/registerwidget.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -98,14 +94,11 @@ class _RegisterPageState extends State {
   }
 
   void _onRegister() async {
-    final ref = FirebaseDatabase.instance.ref().child("users");
-
     if (_formKey.currentState!.validate()) {
       if (_passwordController.text != _confirmPasswordController.text) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content:
-                Text("Password and Password confirmation fields do not match"),
+            content: Text("Password and Password confirmation fields do not match"),
             backgroundColor: Colors.red,
           ),
         );
@@ -114,79 +107,18 @@ class _RegisterPageState extends State {
       }
       _toggleLoading();
       try {
-        UserCredential userCredential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
+        await context.read<FirebaseProvider>().registerUser(
+          email: _emailController.text,
           password: _passwordController.text,
-        );
-        final registerData = {
-          "email": _emailController.text,
-          "firstName": _firstnameController.text,
-          "last_name": surnameController.text,
-          "dateCreated": userCredential.user!.metadata.creationTime,
-        };
-        await userCredential.user!.updateProfile(
-            displayName:
-                "${_firstnameController.text} ${surnameController.text}");
-        await ref
-            .child(userCredential.user!.uid)
-            .set(registerData)
-            .then((value) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Registration successful"),
-              backgroundColor: Colors.green,
-            ),
-          );
-          Get.to(() => LoginPage(), transition: Transition.fadeIn);
-        });
-      } on FirebaseAuthException catch (e) {
-        String errorMessage;
-        if (e.code == 'weak-password') {
-          errorMessage = 'The password provided is too weak.';
-        } else if (e.code == 'email-already-in-use') {
-          errorMessage = 'The account already exists for that email.';
-        } else {
-          errorMessage = 'An error occurred. Please try again.';
-        }
-        toastContainer(
+          firstName: _firstnameController.text,
+          lastName: surnameController.text,
           context: context,
-          msg: errorMessage,
-          color: Colors.red,
         );
+        Get.to(() => LoginPage(), transition: Transition.fadeIn);
       } finally {
         _toggleLoading();
       }
     }
   }
 
-  // void _onRegister() async {
-  //   _toggleLoading();
-  // final fireProvider = context.read<FirestoreProvider>();
-  // final registerData = {
-  //   "email": _emailController.text,
-  //   "firstName": _firstnameController.text,
-  //   "last_name": surnameController.text,
-  //   "dofV": DateTime.now().toString()
-  // };
-  // if (_formKey.currentState!.validate()) {
-  //   _toggleLoading();
-  //   if (_passwordController.text != _confirmPasswordController.text) {
-  //     toastContainer(
-  //         context: context,
-  //         color: Colors.red,
-  //         msg: "Password and Password confirmation fields do not match");
-  //     FocusScope.of(context).requestFocus(_confirmPasswordFocusNode);
-  //     return; // Exit the function if passwords do not match
-  //   }
-
-  //   // fireProvider.SignUpUserFirebase(
-  //   //     email: _emailController.text,
-  //   //     password: _passwordController.text,
-  //   //     regData: registerData);
-
-  //   // After async operations complete, hide loading overlay
-  //   _toggleLoading();
-  // }
-  //}
 }

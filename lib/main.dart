@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
         ChangeNotifierProvider(create: (context) => DiagnosisProvider()),
-        ChangeNotifierProvider(create: (context) => FirestoreProvider()),
+        ChangeNotifierProvider(create: (context) => FirebaseProvider()),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,144 +1,95 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:newmedicob/core/spec/buttomnavbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:newmedicob/core/colors.dart';
-import 'package:newmedicob/core/spec/toastcontainer.dart';
+class FirebaseProvider with ChangeNotifier {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-class FirestoreProvider with ChangeNotifier {
-  void SignUpUserFirebase(
-      {required Map<String, dynamic> regData,
-      BuildContext? context,
-      required String email,
-      required String password}) async {
-    final _auth = FirebaseAuth.instance;
+  final DatabaseReference _userRef =
+      FirebaseDatabase.instance.ref().child("users");
 
+  Future<void> registerUser({
+    required String email,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required BuildContext context,
+  }) async {
     try {
-      final ref = FirebaseDatabase.instance.ref().child('users');
-      final user = FirebaseAuth.instance.currentUser;
-      UserCredential userCredential = await _auth
-          .createUserWithEmailAndPassword(email: email, password: password);
-      await ref.child(user!.uid).set(regData).then((_) {
-        toastContainer(
-            context: context!, msg: "Registeration success", color: GREEN);
-      });
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email.trim(),
+        password: password.trim(),
+      );
 
-      if (kDebugMode) {
-        print(userCredential);
-      }
+      final registerData = {
+        "email": email.trim(),
+        "firstName": firstName,
+        "last_name": lastName,
+        "dateCreated":
+            userCredential.user!.metadata.creationTime?.toString() ?? "",
+      };
+
+      await userCredential.user!.updateProfile(
+        displayName: "$firstName $lastName",
+      );
+
+      await _userRef.child(userCredential.user!.uid).set(registerData);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Registration successful"),
+          backgroundColor: Colors.green,
+        ),
+      );
     } on FirebaseAuthException catch (e) {
+      String errorMessage;
       if (e.code == 'weak-password') {
-        toastContainer(
-            context: context!, msg: "Weak Password Entered", color: RED);
+        errorMessage = 'The password provided is too weak.';
       } else if (e.code == 'email-already-in-use') {
-        toastContainer(
-            context: context!, msg: "Email already registered", color: RED);
+        errorMessage = 'The account already exists for that email.';
+      } else {
+        errorMessage = 'An error occurred. Please try again.';
       }
-    } catch (e) {
-      toastContainer(context: context!, msg: e.toString(), color: RED);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(errorMessage),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 
-  // Future<void> pushUserdataToRealtime(
-  //     {required Map<String, dynamic> regData, required String dbName}) async {
-  //   var ref = FirebaseDatabase.instance.ref(dbName);
-  //   await ref.push().set(regData);
-  // }
-
-//   try {
-//   UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-//     email: "barry.allen@example.com",
-//     password: "SuperSecretPassword!"
-//   );
-// } on FirebaseAuthException catch (e) {
-//   if (e.code == 'user-not-found') {
-//     print('No user found for that email.');
-//   } else if (e.code == 'wrong-password') {
-//     print('Wrong password provided for that user.');
-//   }
-// }
-
-  // final _firestore = FirebaseFirestore.instance;
-  // FireAuth fireAuth = FireAuth();
-
-  // Stream<QuerySnapshot<Map<String, dynamic>>> getStreamCandidates() {
-  //   return _firestore.collection('CandidatesCollection').snapshots();
-  // }
-
-  // final _presidentialCollection =
-  //     FirebaseDatabase.instance.ref('PresidentialCandidates');
-
-  // DatabaseReference getCollectionRealtime(String table) {
-  //   return FirebaseDatabase.instance.ref(table);
-  // }
-
-  // Future logUserOut() async {
-  //   await fireAuth.signOut();
-  //   await saveBoolShare(key: "auth", data: false);
-  //   await deleteCache();
-  //   notifyListeners();
-  // }
-
-  String get userMail => FirebaseAuth.instance.currentUser!.email.toString();
-  String get userDispalyName =>
-      FirebaseAuth.instance.currentUser!.displayName.toString();
-
-  Future<String> getUserDetails() async {
-    FirebaseAuth.instance.currentUser!.email;
-
-    return getUserDetails();
-  }
-  //Add Data to firebase firestore
-
-  Future updateVoteCount(
-      String candidateId, int voteCount, String dbName) async {
-    String userID = candidateId;
-    int updatedVoteCount = voteCount + 1;
-    DatabaseReference userRef =
-        FirebaseDatabase.instance.ref().child(dbName).child(userID);
+  Future<void> signInUser({
+    required String email,
+    required String password,
+    required BuildContext context,
+  }) async {
     try {
-      await userRef.update({
-        "vote_count": updatedVoteCount,
-      });
-      print("Vote count updated: $voteCount to $updatedVoteCount");
-    } catch (error) {
-      print("Error updating vote count: $error");
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const BTNAV()));
+      print(userCredential);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Invalid user"),
+            backgroundColor: Colors.red,
+          ),
+        );
+      } else if (e.code == 'wrong-password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("wrong Email or Password"),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
   }
-
-  Future IncTotalVotecount(String dbTable) async {
-    FirebaseDatabase.instance
-        .ref()
-        .child(dbTable)
-        .set(ServerValue.increment(1));
-  }
-
-  //Update user name code ....
-  // try {
-  //                           if (_passwordController.text ==
-  //                               _conpasswordController.text) {
-  //                             await FirebaseAuth.instance.currentUser!
-  //                                 .updatePassword(_conpasswordController.text)
-  //                                 .then((_) => Get.showSnackbar(GetSnackBar(
-  //                                       title: "Update Success",
-  //                                       message: "User Credentials Updated",
-  //                                       snackPosition: SnackPosition.BOTTOM,
-  //                                     )));
-  //                             _conpasswordController.text = " ";
-  //                             _passwordController.text = " ";
-  //                           } else {
-  //                             Get.showSnackbar(GetSnackBar(
-  //                               title: "Error Updating",
-  //                               message:
-  //                                   "Error Updating User Credentials for User. \n Check password fields",
-  //                             ));
-  //                             _conpasswordController.text = " ";
-  //                             _passwordController.text = " ";
-  //                           }
-  //                         } catch (e) {
-  //                           print("Error Changing Display Name ${e}");
-  //                         }
-
-  void updateUserCredential() {}
 }
