@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/core/colors.dart';
 import 'package:newmedicob/core/network/firebase_provider.dart';
-import 'package:newmedicob/core/spec/buttomnavbar.dart';
 import 'widget/loginWidget.dart';
 
 class LoginPage extends StatefulWidget {
@@ -54,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 key: _formKey,
                 context: context,
                 obsecureText: _seePassword,
+                
                 changeob: () {
                   setState(() {
                     _seePassword = !_seePassword;
@@ -63,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           if (_isLoading)
             Scaffold(
+              backgroundColor: Colors.transparent,
               body: Container(
                 color: Colors.black.withOpacity(0.3),
                 child: Center(
@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: WHITE,
                   ),
                   child: Column(children: [
-                    SpinKitPulse(
+                    SpinKitCircle(
                       color: PRIMARYCOLOR,
                     ),
                     Gap(5),
@@ -107,9 +107,9 @@ class _LoginPageState extends State<LoginPage> {
               context: context,
             );
       } finally {
-        // setState(() {
-        //   _isLoading = false;
-        // });
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
   }

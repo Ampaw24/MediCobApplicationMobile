@@ -71,9 +71,14 @@ class FirebaseProvider with ChangeNotifier {
       SharedPreferences sp = await SharedPreferences.getInstance();
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
+      final userMap = {
+        "username":userCredential.user!.displayName,
+      };
+      await sp.setBool('isLogin', true);
+
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const BTNAV()));
-      print(userCredential);
+    
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -86,6 +91,14 @@ class FirebaseProvider with ChangeNotifier {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("wrong Email or Password"),
+            backgroundColor: Colors.red,
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content:
+                Text("An error occured while logging in user. Try again.."),
             backgroundColor: Colors.red,
           ),
         );

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:newmedicob/core/spec/string.dart';
 import '../../../../core/button.dart';
 import '../../../../core/colors.dart';
 import '../../../../core/custom_text_form_field.dart';
@@ -61,6 +62,8 @@ Widget loginWidget({
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: CustomTextFormField(
+                      validateMsg: REQUIREDFIELDMSG,
+                      validate: true,
                       hintText: "Enter email",
                       controller: emailController,
                       focusNode: emailFocusNode,
@@ -82,6 +85,8 @@ Widget loginWidget({
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: CustomTextFormField(
+                      validateMsg: REQUIREDFIELDMSG,
+                      validate: true,
                       obscureText: obsecureText,
                       hintText: "Enter password",
                       controller: passwordController,

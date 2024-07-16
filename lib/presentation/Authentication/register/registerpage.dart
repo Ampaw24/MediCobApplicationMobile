@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/core/network/firebase_provider.dart';
 import 'package:newmedicob/presentation/Authentication/login/login.dart';
+import 'package:newmedicob/presentation/Authentication/register/complete_registery.dart';
+import '../../../core/colors.dart';
 import 'widget/registerwidget.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -25,6 +30,8 @@ class _RegisterPageState extends State {
   final TextEditingController surnameController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+
+  bool _seePassword = false;
   void _toggleLoading() {
     setState(() {
       isLoading = !isLoading;
@@ -79,13 +86,42 @@ class _RegisterPageState extends State {
                 passwordFocusNode: _passwordFocusNode,
                 key: _formKey,
                 context: context,
+                obsecureText: _seePassword,
+                changeob: () {
+                  setState(() {
+                    _seePassword = !_seePassword;
+                  });
+                },
                 isLoading: _isLoading),
           ),
           if (isLoading)
-            Container(
-              color: Colors.black.withOpacity(0.3),
-              child: Center(
-                child: CircularProgressIndicator(),
+            Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Container(
+                color: Colors.black.withOpacity(0.3),
+                child: Center(
+                    child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 9),
+                  height: 90,
+                  width: 150,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: WHITE,
+                  ),
+                  child: Column(children: [
+                    SpinKitCircle(
+                      color: PRIMARYCOLOR,
+                    ),
+                    const Gap(5),
+                    Text(
+                      "Please Wait ..",
+                      style: GoogleFonts.roboto(
+                        color: PRIMARYCOLOR,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ]),
+                )),
               ),
             ),
         ],
@@ -96,9 +132,11 @@ class _RegisterPageState extends State {
   void _onRegister() async {
     if (_formKey.currentState!.validate()) {
       if (_passwordController.text != _confirmPasswordController.text) {
+        FocusScope.of(context).unfocus();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Password and Password confirmation fields do not match"),
+            content:
+                Text("Password and Password confirmation fields do not match"),
             backgroundColor: Colors.red,
           ),
         );
@@ -107,18 +145,17 @@ class _RegisterPageState extends State {
       }
       _toggleLoading();
       try {
-        await context.read<FirebaseProvider>().registerUser(
-          email: _emailController.text,
-          password: _passwordController.text,
-          firstName: _firstnameController.text,
-          lastName: surnameController.text,
-          context: context,
-        );
-        Get.to(() => LoginPage(), transition: Transition.fadeIn);
+        // await context.read<FirebaseProvider>().registerUser(
+        //       email: _emailController.text,
+        //       password: _passwordController.text,
+        //       firstName: _firstnameController.text,
+        //       lastName: surnameController.text,
+        //       context: context,
+        //     );
+        Get.to(() => CRegisterPage(), transition: Transition.cupertino);
       } finally {
         _toggleLoading();
       }
     }
   }
-
 }

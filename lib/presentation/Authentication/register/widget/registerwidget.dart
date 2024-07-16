@@ -28,6 +28,8 @@ Widget RegisterWidget({
   @required Key? key,
   required BuildContext? context,
   required bool isLoading,
+  void Function()? changeob,
+  bool? obsecureText,
 }) {
   return SingleChildScrollView(
       child: Form(
@@ -157,8 +159,12 @@ Widget RegisterWidget({
                         focusNode: passwordFocusNode,
                         fillColor: WHITE,
                         hintStyle: subheaderText,
-                        suffix: const Icon(
-                          Iconsax.eye,
+                        suffix: IconButton(
+                          splashColor: PRIMARYLIGHT,
+                          onPressed: changeob,
+                          icon: obsecureText!
+                              ? const Icon(Iconsax.eye_slash)
+                              : const Icon(Iconsax.eye),
                         ),
                       ),
                     ),
