@@ -15,6 +15,7 @@ class FirebaseProvider with ChangeNotifier {
     required String password,
     required String firstName,
     required String lastName,
+    required Map<String,dynamic>userDetails,
     required BuildContext context,
   }) async {
     try {
@@ -24,19 +25,11 @@ class FirebaseProvider with ChangeNotifier {
         password: password.trim(),
       );
 
-      final registerData = {
-        "email": email.trim(),
-        "firstName": firstName,
-        "last_name": lastName,
-        "dateCreated":
-            userCredential.user!.metadata.creationTime?.toString() ?? "",
-      };
-
       await userCredential.user!.updateProfile(
         displayName: "$firstName $lastName",
       );
 
-      await _userRef.child(userCredential.user!.uid).set(registerData);
+      await _userRef.child(userCredential.user!.uid).set(userDetails);
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

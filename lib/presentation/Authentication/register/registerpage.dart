@@ -32,11 +32,7 @@ class _RegisterPageState extends State {
       TextEditingController();
 
   bool _seePassword = false;
-  void _toggleLoading() {
-    setState(() {
-      isLoading = !isLoading;
-    });
-  }
+
 
   FocusNode? _emailFocusNode,
       _passwordFocusNode,
@@ -94,36 +90,6 @@ class _RegisterPageState extends State {
                 },
                 isLoading: _isLoading),
           ),
-          if (isLoading)
-            Scaffold(
-              backgroundColor: Colors.transparent,
-              body: Container(
-                color: Colors.black.withOpacity(0.3),
-                child: Center(
-                    child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 9),
-                  height: 90,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: WHITE,
-                  ),
-                  child: Column(children: [
-                    SpinKitCircle(
-                      color: PRIMARYCOLOR,
-                    ),
-                    const Gap(5),
-                    Text(
-                      "Please Wait ..",
-                      style: GoogleFonts.roboto(
-                        color: PRIMARYCOLOR,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    )
-                  ]),
-                )),
-              ),
-            ),
         ],
       ),
     );
@@ -143,19 +109,19 @@ class _RegisterPageState extends State {
         FocusScope.of(context).requestFocus(_confirmPasswordFocusNode);
         return;
       }
-      _toggleLoading();
-      try {
-        // await context.read<FirebaseProvider>().registerUser(
-        //       email: _emailController.text,
-        //       password: _passwordController.text,
-        //       firstName: _firstnameController.text,
-        //       lastName: surnameController.text,
-        //       context: context,
-        //     );
-        Get.to(() => CRegisterPage(), transition: Transition.cupertino);
-      } finally {
-        _toggleLoading();
-      }
+
+      final userDetails = {
+        "email": _emailController.text,
+        "password": _passwordController.text,
+        "firstName": _firstnameController.text,
+        "lastName": surnameController.text,
+      };
+
+      Get.to(
+          () => CRegisterPage(
+                userMap: userDetails,
+              ),
+          transition: Transition.cupertino);
     }
   }
 }

@@ -205,7 +205,7 @@ Widget RegisterWidget({
                             buttonRadius: 10,
                             height: 55,
                             onPressed: (() => onRegister!()),
-                            text: "Register",
+                            text: "Continue",
                             color: Colors.transparent,
                             context: context,
                             showLoadingIndicator: isLoading,
