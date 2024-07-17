@@ -79,10 +79,10 @@ class _CRegisterPageState extends State<CRegisterPage> {
                     Center(
                       child: Image.asset(
                         'assets/images/registerhealth.png', // Update this with your actual image path
-                        height: 150,
+                        height: 130,
                       ),
                     ),
-                    const Gap(20),
+                    const Gap(10),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
@@ -97,14 +97,14 @@ class _CRegisterPageState extends State<CRegisterPage> {
                         style: subheaderText,
                       ),
                     ),
-                    const Gap(5),
+                    const Gap(10),
                     Form(
                       key: _formKey,
                       child: Column(
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 25, vertical: 7),
+                                horizontal: 20, vertical: 7),
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
@@ -115,7 +115,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 15,
+                              horizontal: 10,
                             ),
                             child: GestureDetector(
                               onTap: () async {
@@ -136,7 +136,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
                                 child: CustomTextFormField(
                                   prefix: Icon(Iconsax.calendar),
                                   contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 20, horizontal: 10),
+                                      vertical: 15, horizontal: 10),
                                   autofocus: false,
                                   hintText: "Date of Birth",
                                   controller: _dobController,
@@ -147,7 +147,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: 10),
                           Row(
                             children: [
                               Expanded(
@@ -156,7 +156,8 @@ class _CRegisterPageState extends State<CRegisterPage> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 7),
+                                        horizontal: 15,
+                                      ),
                                       child: Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
@@ -167,7 +168,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 15),
+                                          horizontal: 10, vertical: 5),
                                       child: CustomTextFormField(
                                         textInputType: TextInputType.number,
                                         autofocus: false,
@@ -225,7 +226,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 25, vertical: 7),
+                                          horizontal: 20, vertical: 5),
                                       child: Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
@@ -236,7 +237,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 15),
+                                          horizontal: 10),
                                       child: CustomTextFormField(
                                         textInputType: TextInputType.number,
                                         autofocus: false,
@@ -323,7 +324,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 7),
+                                horizontal: 15, vertical: 7),
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
@@ -338,7 +339,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
                             ),
                             child: CustomTextFormField(
                               contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: 10),
+                                  vertical: 15, horizontal: 10),
                               controller: _medicalConditionController,
                               fillColor: WHITE,
                               validate: false,
@@ -351,7 +352,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
                           SizedBox(height: 10),
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 25, vertical: 7),
+                                horizontal: 15, vertical: 7),
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
@@ -365,7 +366,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
                             child: DropdownButtonFormField<String>(
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 15, horizontal: 10),
+                                    vertical: 10, horizontal: 15),
                                 filled: true,
                                 fillColor: WHITE,
                                 hintStyle: subheaderText,
@@ -436,7 +437,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
       });
       Map<String, dynamic> sharedMap = {};
       double bmi = double.parse(_weightController.text) /
-          pow(double.parse(_heightController.text),2);
+          pow(double.parse(_heightController.text), 2);
       final healthMap = {
         "Gender": _genderController.text.trim(),
         "height": _heightController.text.toString(),

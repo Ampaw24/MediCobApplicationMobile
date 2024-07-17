@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gap/gap.dart';
 import 'package:newmedicob/core/network/firebase_provider.dart';
 import 'package:newmedicob/core/textstyles.dart';
+import 'package:newmedicob/presentation/BMI/main_screen.dart';
 import 'package:newmedicob/presentation/Homepage/model/usermodel.dart';
 import 'package:newmedicob/presentation/diagnosis/widget/diagnosisloader.dart';
 
@@ -121,17 +122,21 @@ class _HomepageState extends State<Homepage> {
                       fontSize: 15, fontWeight: FontWeight.bold, color: WHITE)),
               Text(interpretBMI(double.parse(user.bmi!)),
                   style: bannerTextWhite2),
-              Container(
-                margin: const EdgeInsets.only(top: 20, right: 15),
-                height: 40,
-                width: 120,
-                decoration: BoxDecoration(
-                    gradient: DEEPBUTTONGRADIENT,
-                    borderRadius: BorderRadius.circular(15)),
-                child: Center(
-                  child: Text(
-                    "Check More",
-                    style: bannerTextWhite2,
+              GestureDetector(
+                onTap: () =>
+                    Get.to(()=>BMIChecker(), transition: Transition.fadeIn),
+                child: Container(
+                  margin: const EdgeInsets.only(top: 20, right: 15),
+                  height: 40,
+                  width: 120,
+                  decoration: BoxDecoration(
+                      gradient: DEEPBUTTONGRADIENT,
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Center(
+                    child: Text(
+                      "Check More",
+                      style: bannerTextWhite2,
+                    ),
                   ),
                 ),
               )

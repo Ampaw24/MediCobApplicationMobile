@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:newmedicob/core/functions.dart';
 import 'package:newmedicob/core/image_constant.dart';
 import 'package:newmedicob/presentation/Authentication/login/login.dart';
 import 'package:newmedicob/presentation/Homepage/model/usermodel.dart';
@@ -62,7 +63,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   weighDescription: "Weight",
                 ),
                 DetailProfileCard(
-                  weighValue: "${calculateAge(DateTime.now())} yrs",
+                  weighValue: "${calculateAge(DateTime.parse(user!.dob!))} yrs",
                   weighDescription: "Age",
                 ),
               ],
@@ -140,10 +141,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     final FirebaseAuth _auth = FirebaseAuth.instance;
                     _auth.signOut().then((_) async {
                       SharedPreferences sp =
-                          await SharedPreferences.getInstance();
+                      await SharedPreferences.getInstance();
                       await sp.setBool('isLogin', false);
-                      print(sp.getBool('isLogin'));
-                      Get.to(LoginPage());
+
+                      Get.to(() => LoginPage());
                     });
                   }
                 },
@@ -186,21 +187,5 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  int calculateAge(DateTime birthDate) {
-    DateTime currentDate = DateTime.now();
-    int age = currentDate.year - birthDate.year;
-    int month1 = currentDate.month;
-    int month2 = birthDate.month;
-
-    if (month2 > month1) {
-      age--;
-    } else if (month1 == month2) {
-      int day1 = currentDate.day;
-      int day2 = birthDate.day;
-      if (day2 > day1) {
-        age--;
-      }
-    }
-    return age;
-  }
+ 
 }

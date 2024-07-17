@@ -50,6 +50,7 @@ dependencies:
   flutter_styled_toast: ^2.2.1
   art_sweetalert: ^0.0.5
   dio: ^5.5.0+1
+  font_awesome_flutter: ^10.7.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
