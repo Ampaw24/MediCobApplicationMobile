@@ -18,18 +18,19 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  late Future<Map<String, dynamic>> _userOutlineFuture;
+
   @override
   void initState() {
+    super.initState();
     final user = FirebaseAuth.instance.currentUser;
-    context
+    _userOutlineFuture = context
         .read<FirebaseProvider>()
         .FetchUserOutline(dbName: "users", uid: user!.uid);
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 85,
@@ -40,7 +41,7 @@ class _HomepageState extends State<Homepage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Hello ${user?.displayName}",
+              "Hello ${FirebaseAuth.instance.currentUser?.displayName}",
               style: GoogleFonts.poppins(
                   color: PRIMARYCOLOR,
                   fontSize: 17,
@@ -68,21 +69,35 @@ class _HomepageState extends State<Homepage> {
             fit: BoxFit.cover,
           )),
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildBMISection(),
-            const SizedBox(height: 16),
-            _buildRecommendationTopics(),
-          ],
-        ),
+      body: FutureBuilder<Map<String, dynamic>>(
+        future: _userOutlineFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (snapshot.hasData) {
+            final user = UserModel.fromJson(snapshot.data!);
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildBMISection(user),
+                  const SizedBox(height: 16),
+                  _buildRecommendationTopics(),
+                ],
+              ),
+            );
+          } else {
+            return Center(child: Text('No data available'));
+          }
+        },
       ),
     );
   }
 
-  Widget _buildBMISection() {
+  Widget _buildBMISection(UserModel user) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.20,
       decoration: BoxDecoration(
@@ -101,10 +116,10 @@ class _HomepageState extends State<Homepage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Gap(30),
-              Text('BMI (${user!.bmi}kg/m²)',
+              Text('BMI (${user.bmi}kg/m²)',
                   style: GoogleFonts.poppins(
                       fontSize: 15, fontWeight: FontWeight.bold, color: WHITE)),
-              Text(interpretBMI(double.parse(user!.bmi!)),
+              Text(interpretBMI(double.parse(user.bmi!)),
                   style: bannerTextWhite2),
               Container(
                 margin: const EdgeInsets.only(top: 20, right: 15),

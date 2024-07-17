@@ -159,6 +159,7 @@ Widget RegisterWidget({
                         focusNode: passwordFocusNode,
                         fillColor: WHITE,
                         hintStyle: subheaderText,
+                        obscureText: obsecureText,
                         suffix: IconButton(
                           splashColor: PRIMARYLIGHT,
                           onPressed: changeob,
@@ -189,8 +190,14 @@ Widget RegisterWidget({
                         focusNode: confirmPasswordFocusNode,
                         fillColor: WHITE,
                         hintStyle: subheaderText,
-                        suffix: const Icon(
-                          Iconsax.eye,
+                        obscureText: obsecureText,
+                        
+                        suffix: IconButton(
+                          splashColor: PRIMARYLIGHT,
+                          onPressed: changeob,
+                          icon: obsecureText
+                              ? const Icon(Iconsax.eye_slash)
+                              : const Icon(Iconsax.eye),
                         ),
                       ),
                     ),
