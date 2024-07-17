@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
@@ -167,6 +169,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 15),
                                       child: CustomTextFormField(
+                                        textInputType: TextInputType.number,
                                         autofocus: false,
                                         hintText: "Height",
                                         controller: _heightController,
@@ -179,10 +182,11 @@ class _CRegisterPageState extends State<CRegisterPage> {
                                             IconButton(
                                               icon: const Icon(Iconsax.minus),
                                               onPressed: () {
-                                                int currentValue = int.tryParse(
-                                                        _heightController
-                                                            .text) ??
-                                                    0;
+                                                double currentValue =
+                                                    double.tryParse(
+                                                            _heightController
+                                                                .text) ??
+                                                        0;
                                                 if (currentValue > 0) {
                                                   setState(() {
                                                     _heightController.text =
@@ -195,10 +199,11 @@ class _CRegisterPageState extends State<CRegisterPage> {
                                             IconButton(
                                               icon: const Icon(Iconsax.add),
                                               onPressed: () {
-                                                int currentValue = int.tryParse(
-                                                        _heightController
-                                                            .text) ??
-                                                    0;
+                                                double currentValue =
+                                                    double.tryParse(
+                                                            _heightController
+                                                                .text) ??
+                                                        0;
                                                 setState(() {
                                                   _heightController.text =
                                                       (currentValue + 1)
@@ -233,6 +238,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 15),
                                       child: CustomTextFormField(
+                                        textInputType: TextInputType.number,
                                         autofocus: false,
                                         hintText: "Weight",
                                         controller: _weightController,
@@ -245,14 +251,15 @@ class _CRegisterPageState extends State<CRegisterPage> {
                                             IconButton(
                                               icon: const Icon(Iconsax.minus),
                                               onPressed: () {
-                                                int currentValue = int.tryParse(
-                                                        _weightController
-                                                            .text) ??
-                                                    0;
+                                                double currentValue =
+                                                    double.tryParse(
+                                                            _weightController
+                                                                .text) ??
+                                                        0;
                                                 if (currentValue > 0) {
                                                   setState(() {
                                                     _weightController.text =
-                                                        (currentValue - 1)
+                                                        (currentValue - 0.5)
                                                             .toString();
                                                   });
                                                 }
@@ -261,13 +268,14 @@ class _CRegisterPageState extends State<CRegisterPage> {
                                             IconButton(
                                               icon: const Icon(Iconsax.add),
                                               onPressed: () {
-                                                int currentValue = int.tryParse(
-                                                        _weightController
-                                                            .text) ??
-                                                    0;
+                                                double currentValue =
+                                                    double.tryParse(
+                                                            _weightController
+                                                                .text) ??
+                                                        0;
                                                 setState(() {
                                                   _weightController.text =
-                                                      (currentValue + 1)
+                                                      (currentValue + 0.5)
                                                           .toString();
                                                 });
                                               },
@@ -427,20 +435,20 @@ class _CRegisterPageState extends State<CRegisterPage> {
         isLoading = true;
       });
       Map<String, dynamic> sharedMap = {};
-      double bmi =double.parse(_heightController.text)  /double.parse(_weightController.text) ;
+      double bmi = double.parse(_weightController.text) /
+          pow(double.parse(_heightController.text),2);
       final healthMap = {
         "Gender": _genderController.text.trim(),
         "height": _heightController.text.toString(),
         "weight": _weightController.text.toString(),
         "medical_condition": _medicalConditionController.text.trim(),
         "fitness_level": _fitnessLevel.toString(),
-        "bmi": bmi.toStringAsFixed(2)
+        "bmi": bmi.toStringAsFixed(2),
+        "dob": _dobController.text.toString()
       };
       sharedMap
         ..addAll(widget.userMap)
         ..addAll(healthMap);
-      print(sharedMap["email"]);
-
       try {
         providerUser.registerUser(
           email: sharedMap["email"],

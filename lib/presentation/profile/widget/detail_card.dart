@@ -21,8 +21,8 @@ class DetailProfileCard extends StatelessWidget {
           color: PRIMARYLIGHT.withOpacity(0.2),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Gap(5),
           Text(
             weighValue,
             style: GoogleFonts.poppins(

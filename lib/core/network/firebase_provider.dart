@@ -74,7 +74,7 @@ class FirebaseProvider with ChangeNotifier {
         email: email,
         password: password,
       );
-      await FetchUserOutline(dbName: "users", uid: userCredential.user!.uid);
+
       await sp.setBool('isLogin', true);
 
       Navigator.pushReplacement(
@@ -134,20 +134,26 @@ class FirebaseProvider with ChangeNotifier {
     }
   }
 
-  Future<Map> FetchUserOutline(
-      {required String dbName, required String uid}) async {
-    try {
-      FirebaseDatabase.instance.setPersistenceEnabled(true);
-      DatabaseReference ref = FirebaseDatabase.instance.ref(dbName).child(uid);
-      DatabaseEvent event = await ref.once();
-      final courses = event.snapshot.value as Map<String, dynamic>;
+Future<Map<String, dynamic>> FetchUserOutline(
+    {required String dbName, required String uid}) async {
+  try {
+    FirebaseDatabase.instance.setPersistenceEnabled(true);
+    DatabaseReference ref = FirebaseDatabase.instance.ref(dbName).child(uid);
+    DatabaseEvent event = await ref.once();
+
+    if (event.snapshot.value != null && event.snapshot.value is Map) {
+      final courses = Map<String, dynamic>.from(event.snapshot.value as Map);
       user = UserModel.fromJson(courses);
       print(user!.email);
       return courses;
-    } on SocketException catch (e) {
-      throw SocketException('No Internet connection $e');
-    } catch (e) {
-      throw Exception('Failed to load course outline');
+    } else {
+      throw Exception('Unexpected value format in database');
     }
+  } on SocketException catch (e) {
+    throw SocketException('No Internet connection $e');
+  } catch (e) {
+    throw Exception('Failed to load course outline $e');
   }
+}
+
 }

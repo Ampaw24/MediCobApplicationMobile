@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newmedicob/core/image_constant.dart';
 import 'package:newmedicob/presentation/Authentication/login/login.dart';
+import 'package:newmedicob/presentation/Homepage/model/usermodel.dart';
 import 'package:newmedicob/presentation/profile/profile_widget.dart';
 import 'package:newmedicob/presentation/profile/widget/detail_card.dart';
 import 'package:gap/gap.dart';
@@ -51,17 +52,17 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
+              children: [
                 DetailProfileCard(
-                  weighValue: "180 cm",
+                  weighValue: "${user?.height!} cm",
                   weighDescription: "Height",
                 ),
                 DetailProfileCard(
-                  weighValue: "200 KG",
+                  weighValue: "${user?.weight!} KG",
                   weighDescription: "Weight",
                 ),
                 DetailProfileCard(
-                  weighValue: "18 yrs",
+                  weighValue: "${calculateAge(DateTime.now())} yrs",
                   weighDescription: "Age",
                 ),
               ],
@@ -183,5 +184,23 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
+  }
+
+  int calculateAge(DateTime birthDate) {
+    DateTime currentDate = DateTime.now();
+    int age = currentDate.year - birthDate.year;
+    int month1 = currentDate.month;
+    int month2 = birthDate.month;
+
+    if (month2 > month1) {
+      age--;
+    } else if (month1 == month2) {
+      int day1 = currentDate.day;
+      int day2 = birthDate.day;
+      if (day2 > day1) {
+        age--;
+      }
+    }
+    return age;
   }
 }

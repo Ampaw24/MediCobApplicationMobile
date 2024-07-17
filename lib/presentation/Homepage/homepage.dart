@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gap/gap.dart';
 import 'package:newmedicob/core/network/firebase_provider.dart';
 import 'package:newmedicob/core/textstyles.dart';
+import 'package:newmedicob/presentation/Homepage/model/usermodel.dart';
 import 'package:newmedicob/presentation/diagnosis/widget/diagnosisloader.dart';
 
 class Homepage extends StatefulWidget {
@@ -19,7 +20,8 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     final user = FirebaseAuth.instance.currentUser;
-context.read<FirebaseProvider>()
+    context
+        .read<FirebaseProvider>()
         .FetchUserOutline(dbName: "users", uid: user!.uid);
     super.initState();
   }
@@ -98,9 +100,9 @@ context.read<FirebaseProvider>()
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Gap(30),
-              Text('BMI (Body Mass Index)',
+              Text('BMI (${user!.bmi}kg/m²)',
                   style: GoogleFonts.poppins(
-                      fontSize: 13, fontWeight: FontWeight.bold, color: WHITE)),
+                      fontSize: 15, fontWeight: FontWeight.bold, color: WHITE)),
               Text('You have a normal weight', style: bannerTextWhite2),
               Container(
                 margin: const EdgeInsets.only(top: 20, right: 15),

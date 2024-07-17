@@ -3,12 +3,13 @@ class UserModel {
   String? lastName;
   String? password;
   String? medicalCondition;
-  int? weight;
+  String? weight;
   String? gender;
   String? email;
-  int? fitnessLevel;
-  int? height;
-  double? bmi;
+  String? fitnessLevel;
+  String? height;
+  String? bmi;
+  String? dob;
 
   UserModel(
       {this.firstName,
@@ -20,7 +21,8 @@ class UserModel {
       this.email,
       this.fitnessLevel,
       this.height,
-      this.bmi});
+      this.bmi,
+      this.dob});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     firstName = json['firstName'];
@@ -33,6 +35,7 @@ class UserModel {
     fitnessLevel = json['fitness_level'];
     height = json['height'];
     bmi = json['bmi'];
+    dob = json['dob'];
   }
 
   Map<String, dynamic> toJson() {
@@ -47,6 +50,7 @@ class UserModel {
     data['fitness_level'] = this.fitnessLevel;
     data['height'] = this.height;
     data['bmi'] = this.bmi;
+    data['dob'] = this.dob;
     return data;
   }
 }
