@@ -15,21 +15,21 @@ class DetailProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
-      width: 80,
+      height: MediaQuery.of(context).size.height * 0.07,
+      width: MediaQuery.of(context).size.width * 0.25,
       decoration: BoxDecoration(
           color: PRIMARYLIGHT.withOpacity(0.2),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
-         const Gap(5),
+          const Gap(5),
           Text(
             weighValue,
             style: GoogleFonts.poppins(
-                color: PRIMARYCOLOR, fontSize: 15, fontWeight: FontWeight.w700),
+                color: PRIMARYCOLOR, fontSize: 13, fontWeight: FontWeight.w500),
           ),
           Text(
-           weighDescription,
+            weighDescription,
             style: GoogleFonts.poppins(
                 color: Colors.blue, fontSize: 12, fontWeight: FontWeight.w400),
           ),

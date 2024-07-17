@@ -422,36 +422,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
             ),
           ),
         ),
-        if (isLoading)
-          Scaffold(
-            backgroundColor: Colors.transparent,
-            body: Container(
-              color: Colors.black.withOpacity(0.3),
-              child: Center(
-                  child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 9),
-                height: 90,
-                width: 150,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: WHITE,
-                ),
-                child: Column(children: [
-                  SpinKitCircle(
-                    color: PRIMARYCOLOR,
-                  ),
-                  const Gap(5),
-                  Text(
-                    "Please Wait ..",
-                    style: GoogleFonts.roboto(
-                      color: PRIMARYCOLOR,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  )
-                ]),
-              )),
-            ),
-          ),
+       
       ],
     );
   }
@@ -470,7 +441,7 @@ class _CRegisterPageState extends State<CRegisterPage> {
       sharedMap
         ..addAll(widget.userMap)
         ..addAll(healthMap);
-      _toggleLoading();
+ 
       try {
         providerUser.registerUser(
           email: sharedMap["email"],
@@ -485,7 +456,6 @@ class _CRegisterPageState extends State<CRegisterPage> {
         toastContainer(context: context, msg: "$e", color: RED);
       }
 
-      _toggleLoading();
     }
   }
 }

@@ -52,7 +52,6 @@ class _LoginPageState extends State<LoginPage> {
                 key: _formKey,
                 context: context,
                 obsecureText: _seePassword,
-                
                 changeob: () {
                   setState(() {
                     _seePassword = !_seePassword;
@@ -68,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Center(
                     child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 9),
-                  height: 90,
+                  height: 100,
                   width: 150,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),

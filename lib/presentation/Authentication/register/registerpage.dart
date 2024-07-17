@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:newmedicob/core/app_export.dart';
-import 'package:newmedicob/core/network/firebase_provider.dart';
-import 'package:newmedicob/presentation/Authentication/login/login.dart';
 import 'package:newmedicob/presentation/Authentication/register/complete_registery.dart';
-import '../../../core/colors.dart';
 import 'widget/registerwidget.dart';
 
 class RegisterPage extends StatefulWidget {

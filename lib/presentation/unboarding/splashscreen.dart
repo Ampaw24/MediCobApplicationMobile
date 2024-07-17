@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:newmedicob/core/spec/buttomnavbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/image_constant.dart';
 import '../../core/progress_dialog_utils.dart';
@@ -25,12 +26,11 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   void loginsessionUser() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     bool? isLogin = sp.getBool('isLogin') ?? false;
-
     if (isLogin) { 
       Timer(
-          const Duration(seconds: 5),
+          const Duration(seconds: 2),
           () => Navigator.of(context).pushReplacement(
-              CupertinoPageRoute(builder: (context) => const LoginPage())));
+              CupertinoPageRoute(builder: (context) => const BTNAV())));
     } else {
       Timer(
           const Duration(seconds: 5),
