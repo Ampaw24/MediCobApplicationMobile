@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newmedicob/core/spec/buttomnavbar.dart';
 import 'package:newmedicob/presentation/Authentication/login/login.dart';
+import 'package:newmedicob/presentation/Homepage/model/usermodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseProvider with ChangeNotifier {
@@ -71,8 +74,7 @@ class FirebaseProvider with ChangeNotifier {
         email: email,
         password: password,
       );
-
-     
+      await FetchUserOutline(dbName: "users", uid: userCredential.user!.uid);
       await sp.setBool('isLogin', true);
 
       Navigator.pushReplacement(
@@ -129,6 +131,23 @@ class FirebaseProvider with ChangeNotifier {
           backgroundColor: Colors.red,
         ),
       );
+    }
+  }
+
+  Future<Map> FetchUserOutline(
+      {required String dbName, required String uid}) async {
+    try {
+      FirebaseDatabase.instance.setPersistenceEnabled(true);
+      DatabaseReference ref = FirebaseDatabase.instance.ref(dbName).child(uid);
+      DatabaseEvent event = await ref.once();
+      final courses = event.snapshot.value as Map<String, dynamic>;
+      user = UserModel.fromJson(courses);
+      print(user!.email);
+      return courses;
+    } on SocketException catch (e) {
+      throw SocketException('No Internet connection $e');
+    } catch (e) {
+      throw Exception('Failed to load course outline');
     }
   }
 }

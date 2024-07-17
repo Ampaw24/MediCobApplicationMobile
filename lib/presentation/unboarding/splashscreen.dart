@@ -26,7 +26,8 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   void loginsessionUser() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     bool? isLogin = sp.getBool('isLogin') ?? false;
-    if (isLogin) { 
+    if (isLogin) {
+      print(isLogin);
       Timer(
           const Duration(seconds: 2),
           () => Navigator.of(context).pushReplacement(
@@ -35,7 +36,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       Timer(
           const Duration(seconds: 5),
           () => Navigator.of(context).pushReplacement(
-              CupertinoPageRoute(builder: (context) => const LoginPage()))); 
+              CupertinoPageRoute(builder: (context) => const LoginPage())));
     }
   }
 

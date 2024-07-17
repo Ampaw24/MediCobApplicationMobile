@@ -1,10 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/core/button.dart';
@@ -13,7 +8,6 @@ import 'package:newmedicob/core/custom_text_form_field.dart';
 import 'package:newmedicob/core/network/firebase_provider.dart';
 import 'package:newmedicob/core/spec/toastcontainer.dart';
 import 'package:newmedicob/core/textstyles.dart';
-import 'package:newmedicob/presentation/Authentication/login/login.dart';
 
 class CRegisterPage extends StatefulWidget {
   final Map<String, dynamic> userMap;
@@ -422,7 +416,6 @@ class _CRegisterPageState extends State<CRegisterPage> {
             ),
           ),
         ),
-       
       ],
     );
   }
@@ -430,32 +423,37 @@ class _CRegisterPageState extends State<CRegisterPage> {
   void _onRegister() async {
     final providerUser = context.read<FirebaseProvider>();
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
       Map<String, dynamic> sharedMap = {};
+      double bmi =double.parse(_heightController.text)  /double.parse(_weightController.text) ;
       final healthMap = {
         "Gender": _genderController.text.trim(),
         "height": _heightController.text.toString(),
         "weight": _weightController.text.toString(),
         "medical_condition": _medicalConditionController.text.trim(),
         "fitness_level": _fitnessLevel.toString(),
+        "bmi": bmi.toStringAsFixed(2)
       };
       sharedMap
         ..addAll(widget.userMap)
         ..addAll(healthMap);
- 
+      print(sharedMap["email"]);
+
       try {
         providerUser.registerUser(
           email: sharedMap["email"],
           password: sharedMap["password"],
           firstName: sharedMap["firstName"],
           lastName: sharedMap["lastName"],
-          userDetails: healthMap,
+          userDetails: sharedMap,
           context: context,
         );
       } catch (e) {
         _toggleLoading();
         toastContainer(context: context, msg: "$e", color: RED);
       }
-
     }
   }
 }

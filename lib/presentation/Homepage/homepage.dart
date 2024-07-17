@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/core/colors.dart';
 import 'package:newmedicob/core/image_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gap/gap.dart';
+import 'package:newmedicob/core/network/firebase_provider.dart';
 import 'package:newmedicob/core/textstyles.dart';
 import 'package:newmedicob/presentation/diagnosis/widget/diagnosisloader.dart';
 
@@ -15,8 +17,16 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   @override
+  void initState() {
+    final user = FirebaseAuth.instance.currentUser;
+context.read<FirebaseProvider>()
+        .FetchUserOutline(dbName: "users", uid: user!.uid);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    UserCredential user;
+    final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 85,
@@ -27,11 +37,11 @@ class _HomepageState extends State<Homepage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Hello Safo",
+              "Hello ${user?.displayName}",
               style: GoogleFonts.poppins(
                   color: PRIMARYCOLOR,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700),
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500),
             ),
             Text(
               "May you always be healthy",

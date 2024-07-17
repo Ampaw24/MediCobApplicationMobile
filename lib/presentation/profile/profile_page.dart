@@ -10,6 +10,7 @@ import 'package:newmedicob/presentation/Authentication/login/login.dart';
 import 'package:newmedicob/presentation/profile/profile_widget.dart';
 import 'package:newmedicob/presentation/profile/widget/detail_card.dart';
 import 'package:gap/gap.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -25,6 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final auth = FirebaseAuth.instance.currentUser;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -45,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
               isCircular: true,
               imagepath: ImageConstant.logo,
               submessage: "May You live healthy!",
-              userName: "Ampaw Justice ",
+              userName: auth!.displayName!,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -135,7 +137,11 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   if (response.isTapConfirmButton) {
                     final FirebaseAuth _auth = FirebaseAuth.instance;
-                    _auth.signOut().then((_) {
+                    _auth.signOut().then((_) async {
+                      SharedPreferences sp =
+                          await SharedPreferences.getInstance();
+                      await sp.setBool('isLogin', false);
+                      print(sp.getBool('isLogin'));
                       Get.to(LoginPage());
                     });
                   }
