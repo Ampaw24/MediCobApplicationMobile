@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/core/colors.dart';
+import 'package:newmedicob/core/functions.dart';
 import 'package:newmedicob/core/image_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gap/gap.dart';
@@ -103,7 +104,8 @@ class _HomepageState extends State<Homepage> {
               Text('BMI (${user!.bmi}kg/m²)',
                   style: GoogleFonts.poppins(
                       fontSize: 15, fontWeight: FontWeight.bold, color: WHITE)),
-              Text('You have a normal weight', style: bannerTextWhite2),
+              Text(interpretBMI(double.parse(user!.bmi!)),
+                  style: bannerTextWhite2),
               Container(
                 margin: const EdgeInsets.only(top: 20, right: 15),
                 height: 40,
