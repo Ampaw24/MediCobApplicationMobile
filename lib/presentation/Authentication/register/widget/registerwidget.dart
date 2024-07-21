@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:newmedicob/core/spec/string.dart';
 import '../../../../core/button.dart';
 import '../../../../core/colors.dart';
 import '../../../../core/custom_text_form_field.dart';
@@ -27,6 +28,8 @@ Widget RegisterWidget({
   @required Key? key,
   required BuildContext? context,
   required bool isLoading,
+  void Function()? changeob,
+  bool? obsecureText,
 }) {
   return SingleChildScrollView(
       child: Form(
@@ -76,6 +79,10 @@ Widget RegisterWidget({
                         focusNode: firstnameFocusNode,
                         fillColor: WHITE,
                         hintStyle: subheaderText,
+                        validateMsg: REQUIREDFIELDMSG,
+                        suffix: const Icon(
+                          Iconsax.user,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -93,12 +100,16 @@ Widget RegisterWidget({
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: CustomTextFormField(
+                        validateMsg: REQUIREDFIELDMSG,
                         autofocus: false,
                         hintText: "Lastname",
                         controller: surnameController,
                         focusNode: surnameFocusNode,
                         fillColor: WHITE,
                         hintStyle: subheaderText,
+                        suffix: const Icon(
+                          Iconsax.user,
+                        ),
                       ),
                     ),
                     Padding(
@@ -115,6 +126,7 @@ Widget RegisterWidget({
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: CustomTextFormField(
+                        validateMsg: REQUIREDFIELDMSG,
                         autofocus: false,
                         hintText: "Add email",
                         controller: emailController,
@@ -140,14 +152,20 @@ Widget RegisterWidget({
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: CustomTextFormField(
+                        validateMsg: REQUIREDFIELDMSG,
                         autofocus: false,
                         hintText: "Create Password",
                         controller: passwordController,
                         focusNode: passwordFocusNode,
                         fillColor: WHITE,
                         hintStyle: subheaderText,
-                        suffix: const Icon(
-                          Iconsax.eye,
+                        obscureText: obsecureText,
+                        suffix: IconButton(
+                          splashColor: PRIMARYLIGHT,
+                          onPressed: changeob,
+                          icon: obsecureText!
+                              ? const Icon(Iconsax.eye_slash)
+                              : const Icon(Iconsax.eye),
                         ),
                       ),
                     ),
@@ -165,14 +183,21 @@ Widget RegisterWidget({
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: CustomTextFormField(
+                        validateMsg: REQUIREDFIELDMSG,
                         autofocus: false,
                         hintText: "Confirm Password",
                         controller: confirmPasswordController,
                         focusNode: confirmPasswordFocusNode,
                         fillColor: WHITE,
                         hintStyle: subheaderText,
-                        suffix: const Icon(
-                          Iconsax.eye,
+                        obscureText: obsecureText,
+                        
+                        suffix: IconButton(
+                          splashColor: PRIMARYLIGHT,
+                          onPressed: changeob,
+                          icon: obsecureText
+                              ? const Icon(Iconsax.eye_slash)
+                              : const Icon(Iconsax.eye),
                         ),
                       ),
                     ),
@@ -187,7 +212,7 @@ Widget RegisterWidget({
                             buttonRadius: 10,
                             height: 55,
                             onPressed: (() => onRegister!()),
-                            text: "Register",
+                            text: "Continue",
                             color: Colors.transparent,
                             context: context,
                             showLoadingIndicator: isLoading,
@@ -210,4 +235,11 @@ Widget RegisterWidget({
                   ],
                 ),
               ])));
+}
+
+String validateText({String? value}) {
+  if (value == null || value.isEmpty) {
+    return 'Please enter your first name';
+  }
+  return "";
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const String primaryfontName = "SF";
 TextStyle h1amberBold = const TextStyle(
@@ -20,6 +21,11 @@ TextStyle subheaderText = const TextStyle(
   fontWeight: FontWeight.w400,
   color: PRIMARYCOLOR,
 );
+TextStyle bannerTextWhite1 = GoogleFonts.poppins(
+    fontSize: 12, fontWeight: FontWeight.w400, color: WHITE);
+
+  TextStyle bannerTextWhite2 = GoogleFonts.poppins(
+    fontSize: 12, fontWeight: FontWeight.w400, color: WHITE);
 
 TextStyle h1BlackBold = const TextStyle(
   fontFamily: primaryfontName,
@@ -215,11 +221,9 @@ TextStyle h4WhitBold = const TextStyle(
   color: WHITE,
 );
 
-
 TextStyle h4Primary = const TextStyle(
   fontFamily: primaryfontName,
   fontWeight: FontWeight.w500,
-  
   fontSize: 15,
   color: PRIMARYCOLOR,
 );

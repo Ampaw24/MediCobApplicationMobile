@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newmedicob/core/spec/string.dart';
 
 import 'colors.dart';
 import 'textstyles.dart';
@@ -6,7 +7,7 @@ import 'theme/custom_text_style.dart';
 import 'theme/theme_helper.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
+  CustomTextFormField({
     super.key,
     this.alignment,
     this.width,
@@ -32,10 +33,13 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.hintText,
     this.hintStyle,
+    this.validate = true,
+    this.validateEmail = false,
+    this.validateMsg,
   });
 
   final Alignment? alignment;
-
+  bool validate;
   final double? width;
 
   final TextEditingController? scrollPadding;
@@ -63,11 +67,11 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? prefix;
 
   final BoxConstraints? prefixConstraints;
-
+  String? validateMsg;
   final Widget? suffix;
 
   final BoxConstraints? suffixConstraints;
-
+  bool validateEmail;
   final EdgeInsets? contentPadding;
 
   final InputBorder? borderDecoration;
@@ -105,10 +109,21 @@ class CustomTextFormField extends StatelessWidget {
           keyboardType: textInputType,
           maxLines: maxLines ?? 1,
           decoration: decoration,
-          validator: validator,
+          validator: (value) {
+            RegExp regex = RegExp(PATTERN);
+            if (value!.isEmpty && validate) {
+              return validateMsg;
+            } else if (validateEmail && !regex.hasMatch(value)) {
+              return "Please enter a valid email address";
+            }
+            return null;
+          },
         ),
       );
   InputDecoration get decoration => InputDecoration(
+        errorStyle: TextStyle(
+          color: SLIDERED,
+        ),
         hintText: hintText ?? "",
         hintStyle: hintStyle ?? CustomTextStyles.headlineSmallPrimary,
         prefixIcon: prefix,
