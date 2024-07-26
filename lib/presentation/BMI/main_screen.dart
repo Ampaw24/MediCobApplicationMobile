@@ -52,18 +52,6 @@ class _BMICheckerState extends State<BMIChecker> {
     return bmi.toStringAsFixed(1);
   }
 
-  /* String getInterpretation(double bmi) {
-    if (bmi >= 25.0) {
-      return 'You have higher than normal body weight. Try to excersie more.';
-    } 
-    else if (bmi > 18.5) {
-      return 'You have a normal body weight. Good Job!';
-    } 
-    else {
-      return 'You have lower than normal body weight. You can eat a bit more.';
-    }
-  } */
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -299,16 +287,16 @@ class _BMICheckerState extends State<BMIChecker> {
                 });
               },
               child: Container(
+                width: double.infinity,
+                height: 80.0,
+                color: activeColor,
+                margin: EdgeInsets.only(top: 10.0),
                 child: Center(
                   child: Text(
                     'Calculate',
                     style: textStyle3,
                   ),
                 ),
-                width: double.infinity,
-                height: 80.0,
-                color: activeColor,
-                margin: EdgeInsets.only(top: 10.0),
               ))
         ],
       ),
