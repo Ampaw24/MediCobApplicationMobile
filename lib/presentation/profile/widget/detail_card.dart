@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newmedicob/core/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:gap/gap.dart';
+
 
 class DetailProfileCard extends StatelessWidget {
   final String weighValue;

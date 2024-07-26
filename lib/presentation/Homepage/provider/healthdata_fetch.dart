@@ -1,5 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:newmedicob/core/network/services.dart';
+
 
 class FetchDataUser {
 
