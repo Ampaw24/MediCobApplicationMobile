@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newmedicob/core/button.dart';
 import 'package:newmedicob/core/image_constant.dart';
+import 'package:newmedicob/presentation/vital%20Check/widget/infor_card_widget.dart';
 
 class VitalSignsPage extends StatelessWidget {
   @override
@@ -74,50 +75,3 @@ class VitalSignsPage extends StatelessWidget {
   }
 }
 
-class InfoCard extends StatelessWidget {
-  final String title;
-  final String value;
-  final IconData icon;
-  final bool fullWidth;
-
-  const InfoCard({
-    Key? key,
-    required this.title,
-    required this.value,
-    required this.icon,
-    this.fullWidth = false,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 8,
-      shadowColor: Colors.blue.withOpacity(0.2),
-      child: Container(
-        width: fullWidth ? double.infinity : 150,
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment:
-              fullWidth ? CrossAxisAlignment.start : CrossAxisAlignment.center,
-          children: [
-            AutoSizeText(
-              title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  value,
-                  style: TextStyle(fontSize: 24),
-                ),
-                Icon(icon),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
