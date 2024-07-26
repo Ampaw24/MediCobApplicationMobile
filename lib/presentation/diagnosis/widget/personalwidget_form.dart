@@ -147,7 +147,7 @@ Widget PersonalFormWidget({
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: CustomTextFormField(
                             autofocus: false,
-                            hintText: "Choose Height",
+                            hintText: "Height",
                             controller: heightController,
                             focusNode: heightFocusNode,
                             fillColor: WHITE,
@@ -275,7 +275,7 @@ Widget PersonalFormWidget({
                               ),
                             ),
                             hint: Text(
-                              'Choose Blood Type',
+                              'Blood Type',
                               style: subheaderText,
                             ),
                             value: bloodGroupController?.text.isNotEmpty == true

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newmedicob/core/button.dart';
 import 'package:newmedicob/core/image_constant.dart';
+import 'package:newmedicob/presentation/BMI/main_screen.dart';
 import 'package:newmedicob/presentation/vital%20Check/widget/infor_card_widget.dart';
 
 class VitalSignsPage extends StatelessWidget {
@@ -35,23 +36,26 @@ class VitalSignsPage extends StatelessWidget {
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
+              children: [
                 InfoCard(
+                  pageWidget: BMIChecker(),
                   title: 'BMI',
-                  value: '30',
+                  value: '0',
                   icon: Icons.calculate,
                 ),
                 InfoCard(
+                  pageWidget: BMIChecker(),
                   title: 'Temp',
-                  value: '30°C',
+                  value: '0°C',
                   icon: Iconsax.cloud,
                 ),
               ],
             ),
             SizedBox(height: 20),
             InfoCard(
+              pageWidget: BMIChecker(),
               title: 'PPG',
-              value: '30 bps',
+              value: '0 bps',
               icon: Icons.favorite,
               fullWidth: true,
             ),
@@ -73,4 +77,3 @@ class VitalSignsPage extends StatelessWidget {
     );
   }
 }
-
