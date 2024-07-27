@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gap/gap.dart';
 import 'package:newmedicob/core/network/firebase_provider.dart';
 import 'package:newmedicob/core/textstyles.dart';
-import 'package:newmedicob/presentation/BMI/main_screen.dart';
+import 'package:newmedicob/presentation/vital%20Check/BMI/main_screen.dart';
 import 'package:newmedicob/presentation/Homepage/model/usermodel.dart';
 import 'package:newmedicob/presentation/diagnosis/widget/diagnosisloader.dart';
 

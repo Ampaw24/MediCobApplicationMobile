@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newmedicob/core/button.dart';
 import 'package:newmedicob/core/image_constant.dart';
-import 'package:newmedicob/presentation/BMI/main_screen.dart';
+import 'package:newmedicob/presentation/vital%20Check/BMI/main_screen.dart';
+import 'package:newmedicob/presentation/vital%20Check/temperature_check/temperature_page.dart';
 import 'package:newmedicob/presentation/vital%20Check/widget/infor_card_widget.dart';
 
 class VitalSignsPage extends StatelessWidget {
@@ -44,7 +45,7 @@ class VitalSignsPage extends StatelessWidget {
                   icon: Icons.calculate,
                 ),
                 InfoCard(
-                  pageWidget: BMIChecker(),
+                  pageWidget: TemperatureConversionPage(),
                   title: 'Temp',
                   value: '0°C',
                   icon: Iconsax.cloud,
