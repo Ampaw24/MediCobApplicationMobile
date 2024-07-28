@@ -7,4 +7,5 @@ class ImageConstant {
   static String registerhealthimg = '$imagePath/registerhealth.png';
   static String bannerBackground = '$imagePath/barbackground.png';
   static String robotLogo = '$imagePath/robotgif.gif';
+  static String temperature_ill = '$imagePath/temperature_ill.png';
 }
