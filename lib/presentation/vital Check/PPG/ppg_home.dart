@@ -6,14 +6,14 @@ import 'package:newmedicob/presentation/vital%20Check/PPG/model/sensor_model.dar
 import 'chart.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
-class HomePage extends StatefulWidget {
+class PPGView extends StatefulWidget {
   @override
-  HomePageView createState() {
-    return HomePageView();
+  PPGViewView createState() {
+    return PPGViewView();
   }
 }
 
-class HomePageView extends State<HomePage> with SingleTickerProviderStateMixin {
+class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
   bool _toggled = false; // toggle button value
   late final List<SensorValue> _data ; // array to store the values
   CameraController ?_controller;
