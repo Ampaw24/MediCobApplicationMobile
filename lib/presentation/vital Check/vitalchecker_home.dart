@@ -11,7 +11,6 @@ import 'package:newmedicob/presentation/vital%20Check/widget/infor_card_widget.d
 class VitalSignsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final vital_provider = context.read<VitalCheckProvider>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -46,7 +45,7 @@ class VitalSignsPage extends StatelessWidget {
                   InfoCard(
                     pageWidget: BMIChecker(),
                     title: 'BMI',
-                    value: '${provider.bmi_value} m/kg',
+                    value: '${provider.bmi_value}',
                     icon: Icons.calculate,
                   ),
                   InfoCard(
