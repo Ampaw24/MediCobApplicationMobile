@@ -62,7 +62,7 @@ class VitalSignsPage extends StatelessWidget {
               InfoCard(
                 pageWidget: PPGView(),
                 title: 'PPG',
-                value: '0 bps',
+                value: '${provider.ppg_value} bps',
                 icon: Icons.favorite,
                 fullWidth: true,
               ),

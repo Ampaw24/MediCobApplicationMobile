@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/presentation/vital%20Check/PPG/model/sensor_model.dart';
+import 'package:newmedicob/presentation/vital%20Check/temperature_check/provider/vital_check_provider.dart';
 import 'chart.dart';
 
 class PPGView extends StatefulWidget {
@@ -49,6 +53,7 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final vitals_provider = context.read<VitalCheckProvider>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -235,6 +240,7 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
   }
 
   void _updateBPM() async {
+    final bpmProvider = Provider.of<VitalCheckProvider>(context, listen: false);
     while (_toggled) {
       final List<SensorValue> values = List.from(_data);
       double avg = 0;
@@ -261,7 +267,7 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
       if (counter > 0) {
         bpm = bpm / counter;
         setState(() {
-        _bpm = ((1 - _alpha) * _bpm + _alpha * bpm).toInt();
+          _bpm = ((1 - _alpha) * _bpm + _alpha * bpm).toInt();
         });
       }
       await Future.delayed(Duration(milliseconds: 1000 * _windowLen ~/ _fs));
@@ -273,15 +279,14 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
           ? "Final BPM: $_bpm"
           : "Could not determine BPM. Please try again.";
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(bpmMessage),
-          duration: Duration(seconds: 2),
-        ),
-      );
+      Get.showSnackbar(GetSnackBar(
+        title: "PPG Checks Done",
+        message: bpmMessage,
+      ));
 
       // Navigate back after showing the SnackBar
       Future.delayed(Duration(seconds: 2), () {
+        bpmProvider.updatePPG(double.parse(_bpm.toString()));
         Navigator.pop(context);
       });
     }
