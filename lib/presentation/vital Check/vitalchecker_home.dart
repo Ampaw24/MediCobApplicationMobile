@@ -8,6 +8,8 @@ import 'package:newmedicob/presentation/vital%20Check/temperature_check/provider
 import 'package:newmedicob/presentation/vital%20Check/temperature_check/temperature_page.dart';
 import 'package:newmedicob/presentation/vital%20Check/widget/infor_card_widget.dart';
 
+import 'PPG/ppg_home.dart';
+
 class VitalSignsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,7 @@ class VitalSignsPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               InfoCard(
-                pageWidget: BMIChecker(),
+                pageWidget: PPGView(),
                 title: 'PPG',
                 value: '0 bps',
                 icon: Icons.favorite,

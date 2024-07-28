@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:newmedicob/presentation/vital%20Check/PPG/model/sensor_model.dart';
 import 'chart.dart';
-import 'package:wakelock_plus/wakelock_plus.dart';
 
 class PPGView extends StatefulWidget {
   @override
@@ -15,38 +13,35 @@ class PPGView extends StatefulWidget {
 
 class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
   bool _toggled = false; // toggle button value
-  late final List<SensorValue> _data ; // array to store the values
-  CameraController ?_controller;
+  final List<SensorValue> _data = []; // array to store the values
+  CameraController? _controller;
   double _alpha = 0.3; // factor for the mean value
-  AnimationController ?_animationController;
+  AnimationController? _animationController;
   double _iconScale = 1;
   int _bpm = 0; // beats per minute
   int _fs = 30; // sampling frequency (fps)
   int _windowLen = 30 * 6; // window length to display - 6 seconds
-  CameraImage ?_image; // store the last camera image
-  double ?_avg; // store the average value during calculation
-  DateTime ?_now; // store the now Datetime
-  Timer ?_timer; // timer for image processing
+  CameraImage? _image; // store the last camera image
+  double? _avg; // store the average value during calculation
+  DateTime? _now; // store the now Datetime
+  Timer? _timer; // timer for image processing
 
   @override
   void initState() {
     super.initState();
     _animationController =
         AnimationController(duration: Duration(milliseconds: 500), vsync: this);
-    _animationController!
-      ..addListener(() {
-        setState(() {
-          _iconScale = 1.0 + _animationController!.value * 0.4;
-        });
+    _animationController!.addListener(() {
+      setState(() {
+        _iconScale = 1.0 + _animationController!.value * 0.4;
       });
+    });
   }
 
   @override
   void dispose() {
     _timer?.cancel();
-    _toggled = false;
     _disposeController();
-    WakelockPlus.disable();
     _animationController?.stop();
     _animationController?.dispose();
     super.dispose();
@@ -60,56 +55,51 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
         child: Column(
           children: <Widget>[
             Expanded(
-                flex: 1,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: EdgeInsets.all(12),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(18),
-                          ),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            alignment: Alignment.center,
-                            children: <Widget>[
-                              _controller != null && _toggled
-                                  ? AspectRatio(
-                                      aspectRatio:
-                                          _controller!.value.aspectRatio,
-                                      child: CameraPreview(_controller!),
-                                    )
-                                  : Container(
-                                      padding: EdgeInsets.all(12),
-                                      alignment: Alignment.center,
-                                      color: Colors.grey,
-                                    ),
+              flex: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: EdgeInsets.all(12),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(18)),
+                        child: Stack(
+                          fit: StackFit.expand,
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            if (_controller != null && _toggled)
+                              AspectRatio(
+                                aspectRatio: _controller!.value.aspectRatio,
+                                child: CameraPreview(_controller!),
+                              )
+                            else
                               Container(
+                                padding: EdgeInsets.all(12),
                                 alignment: Alignment.center,
-                                padding: EdgeInsets.all(4),
+                                color: Colors.grey,
                                 child: Text(
                                   _toggled
                                       ? "Cover both the camera and the flash with your finger"
                                       : "Camera feed will display here",
                                   style: TextStyle(
-                                      backgroundColor: _toggled
-                                          ? Colors.white
-                                          : Colors.transparent),
+                                    backgroundColor: _toggled
+                                        ? Colors.white
+                                        : Colors.transparent,
+                                  ),
                                   textAlign: TextAlign.center,
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                          ],
                         ),
                       ),
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Center(
-                          child: Column(
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Center(
+                      child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
@@ -123,10 +113,12 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
                                 fontSize: 32, fontWeight: FontWeight.bold),
                           ),
                         ],
-                      )),
+                      ),
                     ),
-                  ],
-                )),
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               flex: 1,
               child: Center(
@@ -153,10 +145,9 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
               child: Container(
                 margin: EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(18),
-                    ),
-                    color: Colors.black),
+                  borderRadius: BorderRadius.all(Radius.circular(18)),
+                  color: Colors.black,
+                ),
                 child: Chart(_data),
               ),
             ),
@@ -167,25 +158,26 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
   }
 
   void _clearData() {
-    // create array of 128 ~= 255/2
     _data.clear();
     int now = DateTime.now().millisecondsSinceEpoch;
-    for (int i = 0; i < _windowLen; i++)
+    for (int i = 0; i < _windowLen; i++) {
       _data.insert(
-          0,
-          SensorValue(
-              DateTime.fromMillisecondsSinceEpoch(now - i * 1000 ~/ _fs), 128));
+        0,
+        SensorValue(
+          DateTime.fromMillisecondsSinceEpoch(now - i * 1000 ~/ _fs),
+          128,
+        ),
+      );
+    }
   }
 
   void _toggle() {
     _clearData();
-    _initController().then((onValue) {
-      WakelockPlus.enable();
+    _initController().then((_) {
       _animationController?.repeat(reverse: true);
       setState(() {
         _toggled = true;
       });
-      // after is toggled
       _initTimer();
       _updateBPM();
     });
@@ -193,7 +185,6 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
 
   void _untoggle() {
     _disposeController();
-    WakelockPlus.disable();
     _animationController?.stop();
     _animationController?.value = 0.0;
     setState(() {
@@ -202,30 +193,29 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
   }
 
   void _disposeController() {
-    _controller!.dispose();
-    _controller = null!;
+    _controller?.dispose();
+    _controller = null;
   }
 
   Future<void> _initController() async {
     try {
-      List _cameras = await availableCameras();
-      _controller = CameraController(_cameras.first, ResolutionPreset.low);
+      final cameras = await availableCameras();
+      _controller = CameraController(cameras.first, ResolutionPreset.low);
       await _controller!.initialize();
-      Future.delayed(Duration(milliseconds: 100)).then((onValue) {
-        _controller!.setFlashMode(FlashMode.torch);
-      });
+      await Future.delayed(Duration(milliseconds: 100));
+      _controller!.setFlashMode(FlashMode.torch);
       _controller!.startImageStream((CameraImage image) {
         _image = image;
       });
-    } catch (Exception) {
-    
+    } catch (e) {
+      print("Camera initialization error: $e");
     }
   }
 
   void _initTimer() {
     _timer = Timer.periodic(Duration(milliseconds: 1000 ~/ _fs), (timer) {
-      if (_toggled) {
-        if (_image != null) _scanImage(_image!);
+      if (_toggled && _image != null) {
+        _scanImage(_image!);
       } else {
         timer.cancel();
       }
@@ -234,9 +224,8 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
 
   void _scanImage(CameraImage image) {
     _now = DateTime.now();
-    _avg =
-        image.planes.first.bytes.reduce((value, element) => value + element) /
-            image.planes.first.bytes.length;
+    _avg = image.planes.first.bytes.reduce((a, b) => a + b) /
+        image.planes.first.bytes.length;
     if (_data.length >= _windowLen) {
       _data.removeAt(0);
     }
@@ -246,55 +235,55 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
   }
 
   void _updateBPM() async {
-    // Bear in mind that the method used to calculate the BPM is very rudimentar
-    // feel free to improve it :)
-
-    // Since this function doesn't need to be so "exact" regarding the time it executes,
-    // I only used the a Future.delay to repeat it from time to time.
-    // Ofc you can also use a Timer object to time the callback of this function
-    List<SensorValue> _values;
-    double _avg;
-    int _n;
-    double _m;
-    double _threshold;
-    double _bpm;
-    int _counter;
-    int _previous;
     while (_toggled) {
-      _values = List.from(_data); // create a copy of the current data array
-      _avg = 0;
-      _n = _values.length;
-      _m = 0;
-      _values.forEach((SensorValue value) {
-        _avg += value.value / _n;
-        if (value.value > _m) _m = value.value;
-      });
-      _threshold = (_m + _avg) / 2;
-      _bpm = 0;
-      _counter = 0;
-      _previous = 0;
-      for (int i = 1; i < _n; i++) {
-        if (_values[i - 1].value < _threshold &&
-            _values[i].value > _threshold) {
-          if (_previous != 0) {
-            _counter++;
-            _bpm += 60 *
-                1000 /
-                (_values[i].time.millisecondsSinceEpoch - _previous);
+      final List<SensorValue> values = List.from(_data);
+      double avg = 0;
+      int n = values.length;
+      double m = 0;
+      for (var value in values) {
+        avg += value.value / n;
+        if (value.value > m) m = value.value;
+      }
+      double threshold = (m + avg) / 2;
+      double bpm = 0;
+      int counter = 0;
+      int previous = 0;
+      for (int i = 1; i < n; i++) {
+        if (values[i - 1].value < threshold && values[i].value > threshold) {
+          if (previous != 0) {
+            counter++;
+            bpm +=
+                60 * 1000 / (values[i].time.millisecondsSinceEpoch - previous);
           }
-          _previous = _values[i].time.millisecondsSinceEpoch;
+          previous = values[i].time.millisecondsSinceEpoch;
         }
       }
-      if (_counter > 0) {
-        _bpm = _bpm / _counter;
-        print(_bpm);
+      if (counter > 0) {
+        bpm = bpm / counter;
         setState(() {
-          this._bpm = ((1 - _alpha) * this._bpm + _alpha * _bpm).toInt();
+        _bpm = ((1 - _alpha) * _bpm + _alpha * bpm).toInt();
         });
       }
-      await Future.delayed(Duration(
-          milliseconds:
-              1000 * _windowLen ~/ _fs)); // wait for a new set of _data values
+      await Future.delayed(Duration(milliseconds: 1000 * _windowLen ~/ _fs));
+    }
+
+    // Show SnackBar with the final BPM
+    if (!_toggled) {
+      final String bpmMessage = _bpm > 0
+          ? "Final BPM: $_bpm"
+          : "Could not determine BPM. Please try again.";
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(bpmMessage),
+          duration: Duration(seconds: 2),
+        ),
+      );
+
+      // Navigate back after showing the SnackBar
+      Future.delayed(Duration(seconds: 2), () {
+        Navigator.pop(context);
+      });
     }
   }
 }
