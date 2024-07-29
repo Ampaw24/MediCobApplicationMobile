@@ -5,6 +5,7 @@ import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/core/network/firebase_provider.dart';
 import 'package:newmedicob/firebase_options.dart';
 import 'package:newmedicob/presentation/Authentication/provider/authentication_provider.dart';
+import 'package:newmedicob/presentation/Homepage/provider/healthdata_fetch.dart';
 import 'package:newmedicob/presentation/diagnosis/provider/diagnosisprovider.dart';
 import 'package:newmedicob/presentation/vital%20Check/temperature_check/provider/vital_check_provider.dart';
 import 'core/theme/theme_helper.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DiagnosisProvider()),
         ChangeNotifierProvider(create: (context) => FirebaseProvider()),
         ChangeNotifierProvider(create: (context) => VitalCheckProvider()),
+        ChangeNotifierProvider(create: (context) => FetchHealthTipProvider()),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

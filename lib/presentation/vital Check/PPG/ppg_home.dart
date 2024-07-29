@@ -53,7 +53,6 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final vitals_provider = context.read<VitalCheckProvider>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -213,7 +212,7 @@ class PPGViewView extends State<PPGView> with SingleTickerProviderStateMixin {
         _image = image;
       });
     } catch (e) {
-      print("Camera initialization error: $e");
+      //print("Camera initialization error: $e");
     }
   }
 

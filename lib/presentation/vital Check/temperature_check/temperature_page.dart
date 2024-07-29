@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -43,11 +44,14 @@ class _TemperatureConversionPageState extends State<TemperatureConversionPage> {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset(ImageConstant.temperature_ill),
                   ),
+                  AutoSizeText(
+                      "Measure Patient Temperature with Your Thermometer and Input "),
                   if (_convertedTemperature != null)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
