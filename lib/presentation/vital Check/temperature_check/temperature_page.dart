@@ -1,10 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/core/button.dart';
+import 'package:newmedicob/core/colors.dart';
+import 'package:newmedicob/core/custom_text_form_field.dart';
 import 'package:newmedicob/core/image_constant.dart';
+import 'package:newmedicob/core/textstyles.dart';
 import 'package:newmedicob/presentation/vital%20Check/temperature_check/provider/vital_check_provider.dart';
 
 class TemperatureConversionPage extends StatefulWidget {
@@ -16,6 +20,7 @@ class TemperatureConversionPage extends StatefulWidget {
 class _TemperatureConversionPageState extends State<TemperatureConversionPage> {
   final TextEditingController _controller = TextEditingController();
   double? _convertedTemperature;
+  FocusNode? temperature_focus;
   void _convertTemperature(String value) {
     setState(() {
       double? inputTemperature = double.tryParse(value);
@@ -25,6 +30,18 @@ class _TemperatureConversionPageState extends State<TemperatureConversionPage> {
         _convertedTemperature = null;
       }
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    temperature_focus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    temperature_focus!.dispose();
+    super.dispose();
   }
 
   @override
@@ -43,51 +60,70 @@ class _TemperatureConversionPageState extends State<TemperatureConversionPage> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(ImageConstant.temperature_ill),
-                  ),
-                  AutoSizeText(
-                      "Measure Patient Temperature with Your Thermometer and Input "),
-                  if (_convertedTemperature != null)
+              child: GestureDetector(
+                onTap: () => temperature_focus!.unfocus(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: Text(
-                        'Temperature in Fahrenheit: ${_convertedTemperature!.toStringAsFixed(2)}',
-                        style: TextStyle(fontSize: 18),
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(ImageConstant.temperature_ill),
+                    ),
+                    AutoSizeText(
+                        "Record Temperature taken, using the Thermometer "),
+                    const Gap(10),
+                    if (_convertedTemperature != null)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: Text(
+                          'Temperature in Fahrenheit: ${_convertedTemperature!.toStringAsFixed(2)}',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+
+
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 25, vertical: 7),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Enter Temperature",
+                          style: subheaderText,
+                        ),
                       ),
                     ),
-                  TextField(
-                    controller: _controller,
-                    onChanged: _convertTemperature,
-                    decoration: InputDecoration(
-                      labelText: 'Enter temperature in Celsius',
-                      border: OutlineInputBorder(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: CustomTextFormField(
+                        suffix: const Icon(Iconsax.user),
+                        hintText: "Temperature",
+                        controller: _controller,
+                        focusNode: temperature_focus,
+                        fillColor: WHITE,
+                        hintStyle: subheaderText,
+                      ),
                     ),
-                    keyboardType: TextInputType.number,
-                  ),
-                  SizedBox(height: 30.0),
-                  button(
-                    onPressed: () async {
-                      vital_provider
-                          .updateTemperature(double.parse(_controller.text));
+                    SizedBox(height: 30.0),
+                    button(
+                      onPressed: () async {
+                        vital_provider
+                            .updateTemperature(double.parse(_controller.text));
 
-                      Get.snackbar("Temperature",
-                          "Patient Temperature added Successfully",
-                          colorText: Colors.white,
-                          backgroundColor: Colors.green);
-                      Navigator.pop(context);
-                    },
-                    text: "Add Temperature",
-                    color: Colors.transparent,
-                    context: context,
-                    useGradient: true,
-                    height: 50,
-                  ),
-                ],
+                        Get.snackbar("Temperature",
+                            "Patient Temperature added Successfully",
+                            colorText: Colors.white,
+                            backgroundColor: Colors.green);
+                        Navigator.pop(context);
+                      },
+                      text: "Add Temperature",
+                      color: Colors.transparent,
+                      context: context,
+                      useGradient: true,
+                      height: 50,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

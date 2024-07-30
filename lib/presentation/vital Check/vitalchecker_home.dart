@@ -17,6 +17,9 @@ class VitalSignsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Iconsax.close_circle)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -45,7 +45,10 @@ class InfoCard extends StatelessWidget {
                     value,
                     style: TextStyle(fontSize: 24),
                   ),
-                  Icon(icon),
+                  Icon(
+                    icon,
+                    color: Colors.red,
+                  ),
                 ],
               ),
             ],
