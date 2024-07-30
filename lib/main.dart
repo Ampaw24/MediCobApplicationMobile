@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -11,12 +12,13 @@ import 'package:newmedicob/presentation/vital%20Check/temperature_check/provider
 import 'core/theme/theme_helper.dart';
 import 'presentation/unboarding/splashscreen.dart';
 
+late List<CameraDescription> cameras;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  cameras = await availableCameras();
   runApp(const MyApp());
 }
 
