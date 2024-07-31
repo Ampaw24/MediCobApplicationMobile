@@ -99,7 +99,12 @@ class _HomepageState extends State<Homepage> {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
                           return RefreshIndicator(
-                            onRefresh: () async {},
+                            color: themeChange.darkTheme ? PRIMARYCOLOR : WHITE,
+                            backgroundColor:
+                                themeChange.darkTheme ? WHITE : PRIMARYLIGHT,
+                            onRefresh: () async {
+                              
+                            },
                             child: ListView.builder(
                               itemCount: buildTips.health_TipsList.length,
                               itemBuilder: (context, index) {
@@ -115,24 +120,7 @@ class _HomepageState extends State<Homepage> {
                             ),
                           );
                         } else {
-                          return Shimmer.fromColors(
-                            baseColor: Colors.grey[300] as Color,
-                            highlightColor: Colors.grey[100] as Color,
-                            child: ListView.builder(
-                              itemCount: 10, // number of shimmer items to show
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  height: 100, // height of each shimmer item
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                  ),
-                                );
-                              },
-                            ),
-                          );
+                          return shimmerList(itemCount: 10);
                         }
                       },
                     ),
@@ -265,4 +253,28 @@ class _HomepageState extends State<Homepage> {
           ),
         ),
       );
+
+  /// Displays a list of shimmer items
+  Widget shimmerList({
+    required int itemCount, // number of shimmer items to show
+    double itemHeight = 100, // height of each shimmer item
+  }) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300] as Color,
+      highlightColor: Colors.grey[100] as Color,
+      child: ListView.builder(
+        itemCount: itemCount,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            height: itemHeight,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+            ),
+          );
+        },
+      ),
+    );
+  }
 }
