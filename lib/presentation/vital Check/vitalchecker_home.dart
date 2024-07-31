@@ -2,20 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/core/button.dart';
+import 'package:newmedicob/core/colors.dart';
 import 'package:newmedicob/core/image_constant.dart';
+import 'package:newmedicob/presentation/profile/provider/darktheme_provider.dart';
 import 'package:newmedicob/presentation/vital%20Check/BMI/main_screen.dart';
 import 'package:newmedicob/presentation/vital%20Check/PPG/pp_original.dart';
 import 'package:newmedicob/presentation/vital%20Check/temperature_check/provider/vital_check_provider.dart';
 import 'package:newmedicob/presentation/vital%20Check/temperature_check/temperature_page.dart';
 import 'package:newmedicob/presentation/vital%20Check/widget/infor_card_widget.dart';
 
-
 class VitalSignsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
+      backgroundColor: WHITE,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: themeChange.darkTheme ? PRIMARYCOLOR : Colors.white,
         elevation: 0,
         leading: IconButton(
             onPressed: () => Navigator.pop(context),
@@ -61,13 +64,16 @@ class VitalSignsPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              InfoCard(
-                pageWidget: PPOriginalPage(),
-                title: 'PPG',
-                value: '${provider.ppg_value} bps',
-                icon: Icons.favorite,
-                fullWidth: true,
+              SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: InfoCard(
+                  pageWidget: PPOriginalPage(),
+                  title: 'PPG',
+                  value: '${provider.ppg_value} bps',
+                  icon: Icons.favorite,
+                  fullWidth: true,
+                ),
               ),
               Spacer(),
               Padding(

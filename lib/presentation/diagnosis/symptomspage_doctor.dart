@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:newmedicob/core/app_export.dart';
+import 'package:newmedicob/core/colors.dart';
 import 'package:newmedicob/presentation/diagnosis/provider/diagnosisprovider.dart';
 import 'package:newmedicob/presentation/diagnosis/widget/symptomspage_doctor_widget.dart';
 import 'package:newmedicob/presentation/vital%20Check/vitalchecker_home.dart';
@@ -49,6 +50,7 @@ class _SymptomsFormDiagnosisState extends State {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor: WHITE,
         body: SymptomDetailsDoctor(
             locationController: diagnosisProvider.locationController,
             locationFocusNode: locationFocusNode,

@@ -1,6 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:newmedicob/core/app_export.dart';
+import 'package:newmedicob/core/colors.dart';
+import 'package:newmedicob/presentation/profile/provider/darktheme_provider.dart';
 
 class InfoCard extends StatelessWidget {
   final String title;
@@ -19,6 +22,7 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     return GestureDetector(
       onTap: () => Get.to(() => pageWidget, transition: Transition.cupertino),
       child: Card(
@@ -26,7 +30,10 @@ class InfoCard extends StatelessWidget {
         shadowColor: Colors.blue.withOpacity(0.2),
         child: Container(
           width: fullWidth ? double.infinity : 150,
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+              color: themeChange.darkTheme ? PRIMARYCOLOR : WHITE,
+              borderRadius: BorderRadius.circular(10)),
           child: Column(
             crossAxisAlignment: fullWidth
                 ? CrossAxisAlignment.start

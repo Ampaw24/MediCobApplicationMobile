@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newmedicob/core/app_export.dart';
+import 'package:newmedicob/core/colors.dart';
 import 'package:newmedicob/presentation/diagnosis/provider/diagnosisprovider.dart';
 import 'package:newmedicob/presentation/diagnosis/symptomsform.dart';
 import 'package:newmedicob/presentation/diagnosis/widget/personalwidget_form.dart';
@@ -49,6 +50,7 @@ class _PersonalFormDiagnosisState extends State {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor: WHITE,
         body: PersonalFormWidget(
             heightController: diagnosisProvider.heightController,
             weightController: diagnosisProvider.weightController,
