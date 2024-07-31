@@ -5,7 +5,7 @@ import 'package:newmedicob/presentation/vital%20Check/PPG/model/sensor_model.dar
 class Chart extends StatelessWidget {
   final List<SensorValue> data;
 
-  Chart(this.data);
+  const Chart(this.data);
 
   @override
   Widget build(BuildContext context) {

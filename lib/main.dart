@@ -11,7 +11,6 @@ import 'package:newmedicob/presentation/diagnosis/provider/diagnosisprovider.dar
 import 'package:newmedicob/presentation/profile/provider/darktheme_provider.dart';
 import 'package:newmedicob/presentation/profile/widget/thtme_styles.dart';
 import 'package:newmedicob/presentation/vital%20Check/temperature_check/provider/vital_check_provider.dart';
-import 'core/theme/theme_helper.dart';
 import 'presentation/unboarding/splashscreen.dart';
 
 late List<CameraDescription> cameras;
