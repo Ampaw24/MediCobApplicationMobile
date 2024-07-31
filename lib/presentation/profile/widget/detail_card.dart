@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:newmedicob/core/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-
-class DetailProfileCard extends StatelessWidget {
+class DetailProfileCard extends StatefulWidget {
   final String weighValue;
   final String weighDescription;
   const DetailProfileCard({
@@ -11,6 +11,26 @@ class DetailProfileCard extends StatelessWidget {
     required this.weighValue,
     required this.weighDescription,
   });
+
+  @override
+  State<DetailProfileCard> createState() => _DetailProfileCardState();
+}
+
+class _DetailProfileCardState extends State<DetailProfileCard> {
+  bool isDarkMode = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadThemePreference();
+  }
+
+  _loadThemePreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isDarkMode = prefs.getBool('isDarkMode') ?? false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +44,12 @@ class DetailProfileCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            weighValue,
+            widget.weighValue,
             style: GoogleFonts.poppins(
-                color: PRIMARYCOLOR, fontSize: 13, fontWeight: FontWeight.w500),
+                color: WHITE, fontSize: 13, fontWeight: FontWeight.w500),
           ),
           Text(
-            weighDescription,
+            widget.weighDescription,
             style: GoogleFonts.poppins(
                 color: Colors.blue, fontSize: 12, fontWeight: FontWeight.w400),
           ),

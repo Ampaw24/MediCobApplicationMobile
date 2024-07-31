@@ -11,6 +11,7 @@ import 'package:gap/gap.dart';
 import 'package:newmedicob/core/network/firebase_provider.dart';
 import 'package:newmedicob/core/textstyles.dart';
 import 'package:newmedicob/presentation/Homepage/provider/healthdata_fetch.dart';
+import 'package:newmedicob/presentation/profile/provider/darktheme_provider.dart';
 import 'package:newmedicob/presentation/vital%20Check/BMI/main_screen.dart';
 import 'package:newmedicob/presentation/Homepage/model/usermodel.dart';
 import 'package:newmedicob/presentation/diagnosis/widget/diagnosisloader.dart';
@@ -27,6 +28,7 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
+
     final user = FirebaseAuth.instance.currentUser;
     _userOutlineFuture = context
         .read<FirebaseProvider>()
@@ -35,6 +37,7 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     final buildTips = context.read<FetchHealthTipProvider>();
     return Scaffold(
       appBar: AppBar(
@@ -48,7 +51,7 @@ class _HomepageState extends State<Homepage> {
             Text(
               "Hello ${FirebaseAuth.instance.currentUser?.displayName}",
               style: GoogleFonts.poppins(
-                  color: PRIMARYCOLOR,
+                  color: themeChange.darkTheme ? WHITE : PRIMARYCOLOR,
                   fontSize: 17,
                   fontWeight: FontWeight.w500),
             ),
@@ -73,7 +76,6 @@ class _HomepageState extends State<Homepage> {
             ImageConstant.robotLogo,
             fit: BoxFit.cover,
           )),
-      backgroundColor: Colors.white,
       body: FutureBuilder<Map<String, dynamic>>(
         future: _userOutlineFuture,
         builder: (context, snapshot) {

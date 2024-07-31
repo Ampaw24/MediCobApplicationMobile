@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newmedicob/core/app_export.dart';
+import 'package:newmedicob/core/colors.dart';
 import 'package:newmedicob/core/functions.dart';
 import 'package:newmedicob/core/image_constant.dart';
 import 'package:newmedicob/presentation/Authentication/login/login.dart';
@@ -23,36 +24,17 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool isDarkMode = false;
-
   @override
   void initState() {
     super.initState();
-    _loadThemePreference();
   }
-
-  _loadThemePreference() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      isDarkMode = prefs.getBool('isDarkMode') ?? false;
-    });
-  }
-
-  _saveThemePreference(bool value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isDarkMode', value);
-  }
-
-  bool _isDarkTheme = false;
 
   @override
   Widget build(BuildContext context) {
     final auth = FirebaseAuth.instance.currentUser;
     final themeChange = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
-      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         toolbarHeight: 25,
         centerTitle: true,
         title: Text(
@@ -66,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             profilewidget(
-              color: isDarkMode ? Colors.grey[850] as Color : Colors.white,
+              color: Colors.white,
               isCircular: true,
               imagepath: ImageConstant.logo,
               submessage: "May You live healthy!",
@@ -95,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Text(
                 "Account Settings",
                 style: TextStyle(
-                  color: isDarkMode ? Colors.white : Colors.black,
+                  color: themeChange.darkTheme ? Colors.white : Colors.black,
                 ),
               ),
             ),
@@ -121,16 +103,14 @@ class _ProfilePageState extends State<ProfilePage> {
               description: "Change App Theme",
               icon: Iconsax.moon,
               color: Colors.black,
-              onTap: () {
-                setState(() {
-                  _isDarkTheme = !_isDarkTheme;
-                });
-              },
+              onTap: () {},
               trailWidget: Switch(
-                value: _isDarkTheme,
+                splashRadius: 10,
+                activeColor: PRIMARYCOLOR,
+                value: themeChange.darkTheme,
                 onChanged: (value) {
                   setState(() {
-                    _isDarkTheme = value;
+                    themeChange.darkTheme = !themeChange.darkTheme;
                   });
                 },
               ),
@@ -149,9 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
               description: "Delete your account permanently",
               icon: Iconsax.profile_delete,
               color: Colors.red,
-              onTap: () {
-                themeChange.darkTheme = !themeChange.darkTheme;
-              },
+              onTap: () {},
             ),
           ],
         ),
@@ -168,12 +146,15 @@ class _ProfilePageState extends State<ProfilePage> {
     required VoidCallback onTap,
     Widget? trailWidget,
   }) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     return Container(
       margin: const EdgeInsets.only(top: 15, right: 10, left: 10),
       height: 76,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: isDarkMode ? Colors.grey[850] : Color(0xffF8F8F8),
+        color: themeChange.darkTheme
+            ? Color.fromARGB(194, 67, 66, 66)
+            : Color(0xffF8F8F8),
         borderRadius: BorderRadius.circular(10),
       ),
       child: profilewidgetIcon(
