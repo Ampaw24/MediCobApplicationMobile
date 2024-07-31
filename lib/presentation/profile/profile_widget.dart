@@ -69,12 +69,14 @@ class profilewidgetIcon extends StatelessWidget {
   final bool isCircular;
   final bool isIcon;
   final Widget? icon;
+  final Widget? trail;
   void Function()? tap;
   profilewidgetIcon({
     Key? key,
     this.isCircular = false,
     this.tap,
     this.icon,
+    this.trail,
     required this.userName,
     required this.submessage,
     required this.color,

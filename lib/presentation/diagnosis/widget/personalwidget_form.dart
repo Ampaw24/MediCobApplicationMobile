@@ -99,6 +99,12 @@ Widget PersonalFormWidget({
                   focusNode: firstnameFocusNode,
                   fillColor: WHITE,
                   hintStyle: subheaderText,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a name';
+                    }
+                    return null;
+                  },
                 ),
               ),
               const SizedBox(height: 10),
@@ -123,6 +129,12 @@ Widget PersonalFormWidget({
                   focusNode: nhisFocusNode,
                   fillColor: WHITE,
                   hintStyle: subheaderText,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter NHIS ID';
+                    }
+                    return null;
+                  },
                 ),
               ),
               const SizedBox(height: 10),
@@ -179,6 +191,12 @@ Widget PersonalFormWidget({
                                 ),
                               ],
                             ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter height';
+                              }
+                              return null;
+                            },
                           ),
                         ),
                       ],
@@ -236,6 +254,12 @@ Widget PersonalFormWidget({
                                 ),
                               ],
                             ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter weight';
+                              }
+                              return null;
+                            },
                           ),
                         ),
                       ],
@@ -291,6 +315,12 @@ Widget PersonalFormWidget({
                                 child: Text(value),
                               );
                             }).toList(),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please select a blood type';
+                              }
+                              return null;
+                            },
                           ),
                         ),
                       ],
@@ -342,6 +372,12 @@ Widget PersonalFormWidget({
                                 child: Text(value),
                               );
                             }).toList(),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please select a genotype';
+                              }
+                              return null;
+                            },
                           ),
                         ),
                       ],
@@ -391,6 +427,12 @@ Widget PersonalFormWidget({
                       child: Text(value),
                     );
                   }).toList(),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please select a gender';
+                    }
+                    return null;
+                  },
                 ),
               ),
               Padding(
@@ -405,6 +447,9 @@ Widget PersonalFormWidget({
                     height: 55,
                     onPressed: () {
                       Get.to(SymptomsFormDiagnosis());
+                      // if (Form.of(context!).validate()) {
+
+                      // }
                     },
                     text: "Continue",
                     color: Colors.transparent,

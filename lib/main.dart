@@ -8,6 +8,8 @@ import 'package:newmedicob/firebase_options.dart';
 import 'package:newmedicob/presentation/Authentication/provider/authentication_provider.dart';
 import 'package:newmedicob/presentation/Homepage/provider/healthdata_fetch.dart';
 import 'package:newmedicob/presentation/diagnosis/provider/diagnosisprovider.dart';
+import 'package:newmedicob/presentation/profile/provider/darktheme_provider.dart';
+import 'package:newmedicob/presentation/profile/widget/thtme_styles.dart';
 import 'package:newmedicob/presentation/vital%20Check/temperature_check/provider/vital_check_provider.dart';
 import 'core/theme/theme_helper.dart';
 import 'presentation/unboarding/splashscreen.dart';
@@ -19,26 +21,56 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   cameras = await availableCameras();
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
+  runApp(
+       MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
         ChangeNotifierProvider(create: (context) => DiagnosisProvider()),
         ChangeNotifierProvider(create: (context) => FirebaseProvider()),
         ChangeNotifierProvider(create: (context) => VitalCheckProvider()),
         ChangeNotifierProvider(create: (context) => FetchHealthTipProvider()),
+        
+      
       ],
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'MedicobApp',
-        theme: theme,
-        home: const SplashScreenPage(),
+      child: const MyApp(), // Ensure MyApp is wrapped by MultiProvider
+    ),
+   );
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+    DarkThemeProvider themeChangeProvider =  DarkThemeProvider();
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentAppTheme();
+  }
+
+  void getCurrentAppTheme() async {
+    themeChangeProvider.darkTheme =
+        await themeChangeProvider.darkThemePreference.getTheme();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => themeChangeProvider,
+      child: Consumer<DarkThemeProvider>(
+        builder: (context,vaue,child) {
+          return GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'MedicobApp',
+              theme: Styles.themeData(themeChangeProvider.darkTheme, context),
+              home: const SplashScreenPage(),
+            
+          );
+        }
       ),
     );
   }
