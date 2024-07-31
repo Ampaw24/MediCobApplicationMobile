@@ -14,6 +14,7 @@ import 'package:newmedicob/presentation/Homepage/provider/healthdata_fetch.dart'
 import 'package:newmedicob/presentation/vital%20Check/BMI/main_screen.dart';
 import 'package:newmedicob/presentation/Homepage/model/usermodel.dart';
 import 'package:newmedicob/presentation/diagnosis/widget/diagnosisloader.dart';
+import 'package:shimmer/shimmer.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -90,17 +91,50 @@ class _HomepageState extends State<Homepage> {
                   _buildBMISection(user),
                   const SizedBox(height: 16),
                   Expanded(
-                      child: ListView.builder(
-                          itemCount: buildTips.health_TipsList.length,
-                          itemBuilder: (context, index) {
-                            return _buildRecommendationItem(
-                                author: buildTips
-                                    .health_TipsList[index].description,
-                                title: buildTips.health_TipsList[index].title,
-                                daysAgo:
-                                    buildTips.health_TipsList[index].daysAgo,
-                                imageUrl: ImageConstant.robotLogo);
-                          }))
+                    child: FutureBuilder(
+                      future: Future.delayed(
+                          Duration(seconds: 5)), // delay for 5 seconds
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return RefreshIndicator(
+                            onRefresh: () async {},
+                            child: ListView.builder(
+                              itemCount: buildTips.health_TipsList.length,
+                              itemBuilder: (context, index) {
+                                return _buildRecommendationItem(
+                                  author: buildTips
+                                      .health_TipsList[index].description,
+                                  title: buildTips.health_TipsList[index].title,
+                                  daysAgo:
+                                      buildTips.health_TipsList[index].daysAgo,
+                                  imageUrl: ImageConstant.robotLogo,
+                                );
+                              },
+                            ),
+                          );
+                        } else {
+                          return Shimmer.fromColors(
+                            baseColor: Colors.grey[300] as Color,
+                            highlightColor: Colors.grey[100] as Color,
+                            child: ListView.builder(
+                              itemCount: 10, // number of shimmer items to show
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  height: 100, // height of each shimmer item
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white,
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  )
                 ],
               ),
             );
