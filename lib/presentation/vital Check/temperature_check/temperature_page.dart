@@ -21,17 +21,6 @@ class _TemperatureConversionPageState extends State<TemperatureConversionPage> {
   final TextEditingController _controller = TextEditingController();
   double? _convertedTemperature;
   FocusNode? temperature_focus;
-  // void _convertTemperature(String value) {
-  //   setState(() {
-  //     double? inputTemperature = double.tryParse(value);
-  //     if (inputTemperature != null) {
-  //       _convertedTemperature = (inputTemperature * 9 / 5) + 32;
-  //     } else {
-  //       _convertedTemperature = null;
-  //     }
-  //   });
-  // }
-
   @override
   void initState() {
     super.initState();
