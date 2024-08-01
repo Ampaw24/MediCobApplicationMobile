@@ -13,7 +13,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State {
-  bool _isLoading = false;
+  final bool _isLoading = false;
   bool isLoading = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

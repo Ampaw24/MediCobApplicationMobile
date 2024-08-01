@@ -27,7 +27,6 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     SharedPreferences sp = await SharedPreferences.getInstance();
     bool? isLogin = sp.getBool('isLogin') ?? false;
     if (isLogin) {
-      print(isLogin);
       Timer(
           const Duration(seconds: 2),
           () => Navigator.of(context).pushReplacement(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newmedicob/core/app_export.dart';
+import 'package:newmedicob/core/colors.dart';
 import 'package:newmedicob/presentation/diagnosis/provider/diagnosisprovider.dart';
 import 'package:newmedicob/presentation/diagnosis/symptomspage_doctor.dart';
 import 'package:newmedicob/presentation/diagnosis/widget/symptoms_widget.dart';
@@ -50,6 +51,7 @@ class _SymptomsFormDiagnosisState extends State {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor: WHITE,
         body: SymptomFormWidget(
             onForgetPassword: () {},
             durationController: diagnosisProvider.durationController,
@@ -71,79 +73,5 @@ class _SymptomsFormDiagnosisState extends State {
       ),
     );
   }
-
-  // void _onRegister() async {
-  //   if (_formKey.currentState!.validate()) {
-  //     if (_passwordController.text != _confirmPasswordController.text) {
-  //       toastContainer(
-  //         text: "Password and Confirm password fields do not match",
-  //         backgroundColor: Colors.red,
-  //       );
-  //       FocusScope.of(context).requestFocus(weightFocusNode);
-  //       return; // Exit the function if passwords do not match
-  //     }
-  //     setState(() => _isLoading = true);
-  //     final map = {
-  //       'fname': _firstnameController.text,
-  //       'lname': _surnameController.text,
-  //       'email': _emailController.text,
-  //       'password': _passwordController.text,
-  //       'password_confirmation': _confirmPasswordController.text,
-  //     };
-  //     final result = await httpChecker(
-  //       httpRequesting: () => httpRequesting(
-  //         useHeader: false,
-  //         endPoint: APIServices.register,
-  //         method: httpMethod.post,
-  //         httpPostBody: map,
-  //       ),
-  //     );
-
-  //     if (result['ok']) {
-  //       pasaUsermodel = PasaUser.fromJson(result['data']);
-  //       await saveStringShare(
-  //         key: "userDetails",
-  //         data: jsonEncode(result['data']),
-  //       );
-  //       await saveBoolShare(key: "auth", data: true);
-  //       toastContainer(
-  //         text: "Registration success",
-  //         backgroundColor: GREEN,
-  //       );
-  //       setState(() => _isLoading = false);
-  //       navigateAndRemoveRoute(context: context, pageName: LoginPage());
-  //     } else {
-  //       setState(() => _isLoading = false);
-  //       switch (result["statusCode"]) {
-  //         case 422:
-  //           String errorMessage = "Unknown error";
-  //           if (result.containsKey('data') &&
-  //               result['data'].containsKey('error_all')) {
-  //             List<dynamic> errorAllList = result['data']['error_all'];
-  //             errorMessage =
-  //                 errorAllList.join(", "); // Join the list into a single string
-  //           }
-  //           toastContainer(
-  //             text: "Validation error: " + errorMessage,
-  //             backgroundColor: Colors.red,
-  //           );
-  //           print(result);
-  //           break;
-  //         case 500:
-  //           toastContainer(
-  //             text: "Server error, please try again later",
-  //             backgroundColor: Colors.red,
-  //           );
-  //           break;
-  //         case 200:
-  //           toastContainer(
-  //             text: result["error"],
-  //             backgroundColor: Colors.indigo,
-  //           );
-  //           break;
-  //         default:
-  //       }
-  //     }
-  //   }
-  // }
+  
 }

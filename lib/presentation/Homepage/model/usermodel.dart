@@ -12,17 +12,17 @@ class UserModel {
   String? dob;
 
   UserModel(
-      {this.firstName,
-      this.lastName,
-      this.password,
-      this.medicalCondition,
-      this.weight,
-      this.gender,
-      this.email,
-      this.fitnessLevel,
-      this.height,
-      this.bmi,
-      this.dob});
+      {firstName,
+      lastName,
+      password,
+      medicalCondition,
+      weight,
+      gender,
+      email,
+      fitnessLevel,
+      height,
+      bmi,
+      dob});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     firstName = json['firstName'];
@@ -39,18 +39,18 @@ class UserModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['password'] = this.password;
-    data['medical_condition'] = this.medicalCondition;
-    data['weight'] = this.weight;
-    data['Gender'] = this.gender;
-    data['email'] = this.email;
-    data['fitness_level'] = this.fitnessLevel;
-    data['height'] = this.height;
-    data['bmi'] = this.bmi;
-    data['dob'] = this.dob;
+    final Map<String, dynamic> data =  Map<String, dynamic>();
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['password'] = password;
+    data['medical_condition'] = medicalCondition;
+    data['weight'] = weight;
+    data['Gender'] = gender;
+    data['email'] = email;
+    data['fitness_level'] = fitnessLevel;
+    data['height'] = height;
+    data['bmi'] = bmi;
+    data['dob'] = dob;
     return data;
   }
 }
