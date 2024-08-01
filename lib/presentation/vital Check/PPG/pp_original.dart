@@ -48,19 +48,83 @@ class _PPOriginalPageState extends State<PPOriginalPage> {
     });
   }
 
+  Future<void> _initializeCamera() async {
+    final cameras = await availableCameras();
+    final camera = cameras.firstWhere(
+        (camera) => camera.lensDirection == CameraLensDirection.back);
+
+    _controller = CameraController(
+      camera,
+      ResolutionPreset.low,
+      enableAudio: false,
+      imageFormatGroup: ImageFormatGroup.yuv420,
+    );
+
+    try {
+      await _controller?.initialize();
+
+      // Turn on the flash
+      await _controller?.setFlashMode(FlashMode.torch);
+    } catch (e) {
+      print('Error initializing camera: $e');
+    }
+
+    _controller?.startImageStream((CameraImage image) {
+      if (_toggled) {
+        final avgRedIntensity = _calculateAverageIntensity(image);
+        setState(() {
+          _data.add(SensorValue(
+            DateTime.now(),
+            avgRedIntensity,
+          ));
+        });
+        print('Average Red Intensity: $avgRedIntensity');
+      }
+    });
+  }
+
+  double _calculateAverageIntensity(CameraImage image) {
+    // Access and process the red channel data from the image
+    // Implement this method according to your data structure
+    return 100.0; // Dummy value for now
+  }
+
   void _startMeasurement() {
+    _initializeCamera();
     setState(() {
       _toggled = true;
     });
 
-    // Initialize the camera or start the measurement process here
-    // For now, we will just simulate the end of measurement.
-    Future.delayed(const Duration(seconds: 5), () {
+    // Simulate measurement duration
+    Future.delayed(const Duration(seconds: 15), () {
       setState(() {
         _isFinished = true;
-        _score = 75; // Example score, replace with actual BPM calculation
+        _score = _calculateBPM(_data);
       });
+
+      _controller?.stopImageStream();
+      _controller?.setFlashMode(FlashMode.off);
     });
+  }
+
+  int _calculateBPM(List<SensorValue> data) {
+    if (data.isEmpty) return 0;
+
+    int peaks = 0;
+    double threshold = 0.5; // Adjust based on your data
+
+    for (int i = 1; i < data.length - 1; i++) {
+      if (data[i].value > data[i - 1].value &&
+          data[i].value > data[i + 1].value &&
+          data[i].value > threshold) {
+        peaks++;
+      }
+    }
+
+    double duration = data.last.time.difference(data.first.time).inSeconds / 60.0;
+    int bpm = (peaks / duration).round();
+    print('Detected BPM: $bpm');
+    return bpm;
   }
 
   void _toggleMeasurement() {
@@ -68,6 +132,7 @@ class _PPOriginalPageState extends State<PPOriginalPage> {
       setState(() {
         _toggled = false;
         _isFinished = false;
+        _controller?.setFlashMode(FlashMode.off);
       });
     } else {
       _startCountdown();

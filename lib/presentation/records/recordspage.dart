@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:newmedicob/core/app_export.dart';
+import 'package:newmedicob/presentation/profile/provider/darktheme_provider.dart';
 import '../../core/colors.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
@@ -14,20 +16,22 @@ class RecordsPage extends StatefulWidget {
 class _RecordsPageState extends State<RecordsPage> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = context.read<DarkThemeProvider>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
           "History",
           style: GoogleFonts.poppins(
-              color: PRIMARYLIGHT, fontSize: 20, fontWeight: FontWeight.w600),
+              color: themeProvider.darkTheme ? WHITE : PRIMARYCOLOR,
+              fontSize: 17,
+              fontWeight: FontWeight.w600),
         ),
       ),
       body: Column(
-        children: const  [
-            TitleBanner(),
-            Gap(10),
-
+        children: const [
+          TitleBanner(),
+          Gap(10),
         ],
       ),
     );
@@ -44,8 +48,8 @@ class TitleBanner extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 70,
-      decoration: BoxDecoration(
-          color: WHITE, borderRadius: BorderRadius.circular(10)),
+      decoration:
+          BoxDecoration(color: WHITE, borderRadius: BorderRadius.circular(10)),
       child: Row(
         children: [
           const Gap(25),
@@ -65,8 +69,7 @@ class TitleBanner extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(left: 20),
             width: MediaQuery.of(context).size.width * 0.6,
-            decoration:
-                BoxDecoration(borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -19,14 +19,15 @@ class DiagnosisLoaderPage extends StatefulWidget {
 class _DiagnosisLoaderPageState extends State<DiagnosisLoaderPage> {
   @override
   initState() {
-    loginsessionUser();
+    waitsessionUser();
     super.initState();
   }
 
-  void loginsessionUser() async {
+  void waitsessionUser() async {
     Timer(
         const Duration(seconds: 5),
-        () => Get.to(transition: Transition.circularReveal, PersonalFormDiagnosis()));
+        () => Get.off(
+            transition: Transition.circularReveal, PersonalFormDiagnosis()));
   }
 
   @override

@@ -80,7 +80,10 @@ class _HomepageState extends State<Homepage> {
         future: _userOutlineFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+                child: CircularProgressIndicator(
+              color: PRIMARYCOLOR,
+            ));
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
@@ -102,9 +105,7 @@ class _HomepageState extends State<Homepage> {
                             color: themeChange.darkTheme ? PRIMARYCOLOR : WHITE,
                             backgroundColor:
                                 themeChange.darkTheme ? WHITE : PRIMARYLIGHT,
-                            onRefresh: () async {
-                              
-                            },
+                            onRefresh: () async {},
                             child: ListView.builder(
                               itemCount: buildTips.health_TipsList.length,
                               itemBuilder: (context, index) {
@@ -202,7 +203,7 @@ class _HomepageState extends State<Homepage> {
             children: [
               Container(
                 padding: const EdgeInsets.only(left: 20),
-                width: MediaQuery.of(context).size.width * 0.6,
+                width: MediaQuery.of(context).size.width * 0.55,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 child: Column(
@@ -225,9 +226,9 @@ class _HomepageState extends State<Homepage> {
                       style: GoogleFonts.poppins(
                           color: rederPurpDeep,
                           fontWeight: FontWeight.w500,
-                          fontSize: 12),
+                          fontSize: 10),
                     ),
-                    const Gap(20),
+                    const Gap(10),
                     AutoSizeText(
                       "$daysAgo Days Ago",
                       maxLines: 5,
