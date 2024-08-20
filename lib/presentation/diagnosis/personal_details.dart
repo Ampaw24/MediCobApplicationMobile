@@ -13,8 +13,7 @@ class PersonalFormDiagnosis extends StatefulWidget {
   const PersonalFormDiagnosis({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _PersonalFormDiagnosisState createState() => _PersonalFormDiagnosisState();
+    _PersonalFormDiagnosisState createState() => _PersonalFormDiagnosisState();
 }
 
 class _PersonalFormDiagnosisState extends State {
@@ -85,7 +84,9 @@ class _PersonalFormDiagnosisState extends State {
   }
 
   void _onRegister() async {
-    Navigator.push(context,
-        CupertinoPageRoute(builder: (context) => SymptomsFormDiagnosis()));
+    if (_formKey.currentState!.validate()) {
+      Navigator.push(context,
+          CupertinoPageRoute(builder: (context) => SymptomsFormDiagnosis()));
+    }
   }
 }

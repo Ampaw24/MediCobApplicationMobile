@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:newmedicob/presentation/vital%20Check/PPG/chartModule.dart';
@@ -66,7 +67,7 @@ class _PPOriginalPageState extends State<PPOriginalPage> {
       // Turn on the flash
       await _controller?.setFlashMode(FlashMode.torch);
     } catch (e) {
-      print('Error initializing camera: $e');
+      log('Error initializing camera: $e');
     }
 
     _controller?.startImageStream((CameraImage image) {
@@ -78,7 +79,7 @@ class _PPOriginalPageState extends State<PPOriginalPage> {
             avgRedIntensity,
           ));
         });
-        print('Average Red Intensity: $avgRedIntensity');
+        log('Average Red Intensity: $avgRedIntensity');
       }
     });
   }
@@ -123,7 +124,7 @@ class _PPOriginalPageState extends State<PPOriginalPage> {
 
     double duration = data.last.time.difference(data.first.time).inSeconds / 60.0;
     int bpm = (peaks / duration).round();
-    print('Detected BPM: $bpm');
+    log('Detected BPM: $bpm');
     return bpm;
   }
 

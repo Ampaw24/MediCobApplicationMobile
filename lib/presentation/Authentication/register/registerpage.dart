@@ -109,6 +109,7 @@ class _RegisterPageState extends State {
         "firstName": _firstnameController.text,
         "lastName": surnameController.text,
       };
+      
 
       Get.to(
           () => CRegisterPage(

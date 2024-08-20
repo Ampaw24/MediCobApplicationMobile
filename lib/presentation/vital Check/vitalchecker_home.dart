@@ -11,6 +11,8 @@ import 'package:newmedicob/presentation/vital%20Check/temperature_check/provider
 import 'package:newmedicob/presentation/vital%20Check/temperature_check/temperature_page.dart';
 import 'package:newmedicob/presentation/vital%20Check/widget/infor_card_widget.dart';
 
+import '../PPG@/heartRate.dart';
+
 class VitalSignsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,7 @@ class VitalSignsPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: InfoCard(
-                  pageWidget: PPOriginalPage(),
+                  pageWidget: HeartRatePage(),
                   title: 'PPG',
                   value: '${provider.ppg_value} bps',
                   icon: Icons.favorite,

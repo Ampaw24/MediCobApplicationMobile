@@ -445,12 +445,7 @@ Widget PersonalFormWidget({
                   child: button(
                     buttonRadius: 10,
                     height: 55,
-                    onPressed: () {
-                      Get.to(SymptomsFormDiagnosis());
-                      // if (Form.of(context!).validate()) {
-
-                      // }
-                    },
+                    onPressed: onRegister,
                     text: "Continue",
                     color: Colors.transparent,
                     context: context,

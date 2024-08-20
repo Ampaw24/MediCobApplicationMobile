@@ -59,14 +59,17 @@ class _SymptomsFormDiagnosisState extends State {
             relieveMeasuresController:
                 diagnosisProvider.reliefMeasureController,
             relieveMeasuresFocusNode: relieveMeasuresFocusNode,
-            onRegister: () {
-              Get.to(() => VitalSignsPage(),
-                  transition: Transition.cupertinoDialog);
-            },
+            onRegister: _onRegister,
             key: _formKey,
             context: context,
             isLoading: _isLoading),
       ),
     );
+  }
+
+  void _onRegister() async {
+    if (_formKey.currentState!.validate()) {
+      Get.to(() => VitalSignsPage(), transition: Transition.cupertinoDialog);
+    }
   }
 }

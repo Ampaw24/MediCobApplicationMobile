@@ -84,7 +84,8 @@ Widget SymptomDetailsDoctor({
               const Gap(10),
               // Relieve Measures
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 7),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 7),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -97,7 +98,8 @@ Widget SymptomDetailsDoctor({
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: DropdownButtonFormField<String>(
                   decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
                     filled: true,
                     fillColor: WHITE,
                     hintStyle: subheaderText,
@@ -127,7 +129,8 @@ Widget SymptomDetailsDoctor({
               const SizedBox(height: 10),
               // Location
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 7),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 7),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -140,7 +143,8 @@ Widget SymptomDetailsDoctor({
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: DropdownButtonFormField<String>(
                   decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
                     filled: true,
                     fillColor: WHITE,
                     hintStyle: subheaderText,
@@ -168,9 +172,10 @@ Widget SymptomDetailsDoctor({
                 ),
               ),
               const SizedBox(height: 10),
-              // Mood or Emotions
+
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 7),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 7),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -183,7 +188,8 @@ Widget SymptomDetailsDoctor({
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: DropdownButtonFormField<String>(
                   decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
                     filled: true,
                     fillColor: WHITE,
                     hintStyle: subheaderText,
@@ -221,7 +227,7 @@ Widget SymptomDetailsDoctor({
                   child: button(
                     buttonRadius: 10,
                     height: 55,
-                    onPressed: (() => onRegister!()),
+                    onPressed: onRegister,
                     text: "Continue",
                     color: Colors.transparent,
                     context: context,

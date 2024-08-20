@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newmedicob/core/app_export.dart';
@@ -62,7 +63,7 @@ class _SymptomsFormDiagnosisState extends State {
             levelFocusNode: levelFocusNode,
             notesController: diagnosisProvider.notesController,
             notesFocusNode: notesFocusNode,
-            onRegister: () => Get.to(SymptomsFormDiagnosisDoctor()),
+            onRegister: _onRegister,
             symptomTypeController: diagnosisProvider.symptomTypeController,
             symptomsFocusNode: symptomTypeFocusNode,
             triggerController: diagnosisProvider.triggerController,
@@ -73,5 +74,9 @@ class _SymptomsFormDiagnosisState extends State {
       ),
     );
   }
-  
+  void _onRegister() async {
+    if (_formKey.currentState!.validate()) {
+      Navigator.push(context,CupertinoPageRoute(builder: (context) => SymptomsFormDiagnosisDoctor()));
+    }
+  }
 }
