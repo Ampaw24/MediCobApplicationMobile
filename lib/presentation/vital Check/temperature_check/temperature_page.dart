@@ -69,8 +69,6 @@ class _TemperatureConversionPageState extends State<TemperatureConversionPage> {
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
-
-
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 25, vertical: 7),
@@ -83,10 +81,12 @@ class _TemperatureConversionPageState extends State<TemperatureConversionPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: CustomTextFormField(
-                        suffix: const Icon(Iconsax.user),
-                        hintText: "Temperature",
+                        suffix: const Icon(Iconsax.health),
+                        textInputType:
+                            TextInputType.numberWithOptions(decimal: true),
+                        hintText: "Temperature in celcius",
                         controller: _controller,
                         focusNode: temperature_focus,
                         fillColor: WHITE,
@@ -94,22 +94,25 @@ class _TemperatureConversionPageState extends State<TemperatureConversionPage> {
                       ),
                     ),
                     SizedBox(height: 30.0),
-                    button(
-                      onPressed: () async {
-                        vital_provider
-                            .updateTemperature(double.parse(_controller.text));
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: button(
+                        onPressed: () async {
+                          vital_provider.updateTemperature(
+                              double.parse(_controller.text));
 
-                        Get.snackbar("Temperature",
-                            "Patient Temperature added Successfully",
-                            colorText: Colors.white,
-                            backgroundColor: Colors.green);
-                        Navigator.pop(context);
-                      },
-                      text: "Add Temperature",
-                      color: Colors.transparent,
-                      context: context,
-                      useGradient: true,
-                      height: 50,
+                          Get.snackbar("Temperature",
+                              "Patient Temperature added Successfully",
+                              colorText: Colors.white,
+                              backgroundColor: Colors.green);
+                          Navigator.pop(context);
+                        },
+                        text: "Add Temperature",
+                        color: Colors.transparent,
+                        context: context,
+                        useGradient: true,
+                        height: 50,
+                      ),
                     ),
                   ],
                 ),

@@ -4,14 +4,13 @@ import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/core/button.dart';
 import 'package:newmedicob/core/colors.dart';
 import 'package:newmedicob/core/image_constant.dart';
+import 'package:newmedicob/presentation/PPG@/ppg.dart';
 import 'package:newmedicob/presentation/profile/provider/darktheme_provider.dart';
 import 'package:newmedicob/presentation/vital%20Check/BMI/main_screen.dart';
-import 'package:newmedicob/presentation/vital%20Check/PPG/pp_original.dart';
 import 'package:newmedicob/presentation/vital%20Check/temperature_check/provider/vital_check_provider.dart';
 import 'package:newmedicob/presentation/vital%20Check/temperature_check/temperature_page.dart';
 import 'package:newmedicob/presentation/vital%20Check/widget/infor_card_widget.dart';
 
-import '../PPG@/heartRate.dart';
 
 class VitalSignsPage extends StatelessWidget {
   @override
@@ -70,7 +69,7 @@ class VitalSignsPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: InfoCard(
-                  pageWidget: HeartRatePage(),
+                  pageWidget: PPGApp(),
                   title: 'PPG',
                   value: '${provider.ppg_value} bps',
                   icon: Icons.favorite,
