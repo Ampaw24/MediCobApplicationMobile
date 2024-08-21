@@ -1,0 +1,293 @@
+{
+    "diagnoses": [
+      {
+        "name": "Chronic Fatigue Syndrome",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 100 },
+          "emotion": ["extreme fatigue", "muscle pain"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "high",
+          "pain_level": { "min": 2, "max": 6 }
+        },
+        "recommendation": "Rest regularly, manage stress, and consult with a healthcare provider."
+      },
+      {
+        "name": "Gout",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 90 },
+          "emotion": ["pain", "discomfort"],
+          "bmi": { "min": 25, "max": 35 },
+          "frequency": "moderate",
+          "pain_level": { "min": 6, "max": 10 }
+        },
+        "recommendation": "Limit purine-rich foods, stay hydrated, and take prescribed medication."
+      },
+      {
+        "name": "Peptic Ulcer",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 80 },
+          "emotion": ["abdominal pain", "nausea"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 4, "max": 7 }
+        },
+        "recommendation": "Avoid spicy foods, take antacids, and consult with a healthcare provider."
+      },
+      {
+        "name": "Sinusitis",
+        "conditions": {
+          "temperature": { "min": 98, "max": 100 },
+          "ppg_level": { "min": 60, "max": 90 },
+          "emotion": ["nasal congestion", "headache"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 3, "max": 6 }
+        },
+        "recommendation": "Use saline nasal sprays, stay hydrated, and rest."
+      },
+      {
+        "name": "Tinnitus",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 100 },
+          "emotion": ["ringing in ears", "irritability"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "low",
+          "pain_level": { "min": 1, "max": 3 }
+        },
+        "recommendation": "Avoid loud noises, manage stress, and consult with an ENT specialist."
+      },
+      {
+        "name": "Vertigo",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 100 },
+          "emotion": ["dizziness", "nausea"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 2, "max": 5 }
+        },
+        "recommendation": "Avoid sudden movements, stay hydrated, and consult with a healthcare provider."
+      },
+      {
+        "name": "Hives",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 70, "max": 110 },
+          "emotion": ["itching", "discomfort"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 1, "max": 3 }
+        },
+        "recommendation": "Take antihistamines, avoid known allergens, and consult with a healthcare provider."
+      },
+      {
+        "name": "Eczema",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 90 },
+          "emotion": ["itchy skin", "irritability"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 1, "max": 4 }
+        },
+        "recommendation": "Use moisturizers, avoid irritants, and consult with a dermatologist."
+      },
+      {
+        "name": "Chronic Obstructive Pulmonary Disease (COPD)",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 100 },
+          "emotion": ["shortness of breath", "chronic cough"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "high",
+          "pain_level": { "min": 2, "max": 5 }
+        },
+        "recommendation": "Use prescribed inhalers, avoid smoking, and consult with a pulmonologist."
+      },
+      {
+        "name": "Osteoarthritis",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 100 },
+          "emotion": ["joint pain", "stiffness"],
+          "bmi": { "min": 25, "max": 35 },
+          "frequency": "moderate",
+          "pain_level": { "min": 4, "max": 7 }
+        },
+        "recommendation": "Engage in low-impact exercise, use pain relief medications, and consult with a rheumatologist."
+      },
+      {
+        "name": "Gastritis",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 80 },
+          "emotion": ["abdominal pain", "nausea"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 3, "max": 6 }
+        },
+        "recommendation": "Avoid spicy and acidic foods, take antacids, and consult with a healthcare provider."
+      },
+      {
+        "name": "Insomnia",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 100 },
+          "emotion": ["difficulty sleeping", "irritability"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "high",
+          "pain_level": { "min": 1, "max": 3 }
+        },
+        "recommendation": "Maintain a regular sleep schedule, avoid stimulants, and consult with a healthcare provider."
+      },
+      {
+        "name": "Acid Reflux",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 90 },
+          "emotion": ["heartburn", "regurgitation"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 2, "max": 5 }
+        },
+        "recommendation": "Avoid large meals, reduce caffeine intake, and take antacids."
+      },
+      {
+        "name": "Menopause",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 90 },
+          "emotion": ["hot flashes", "mood swings"],
+          "bmi": { "min": 18.5, "max": 29.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 1, "max": 4 }
+        },
+        "recommendation": "Maintain a balanced diet, stay active, and consult with a healthcare provider for hormone therapy options."
+      },
+      {
+        "name": "Hyperthyroidism",
+        "conditions": {
+          "temperature": { "min": 98, "max": 100 },
+          "ppg_level": { "min": 80, "max": 120 },
+          "emotion": ["anxiety", "weight loss"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 2, "max": 5 }
+        },
+        "recommendation": "Take prescribed medication, avoid iodine-rich foods, and consult with an endocrinologist."
+      },
+      {
+        "name": "Hypothyroidism",
+        "conditions": {
+          "temperature": { "min": 97, "max": 98 },
+          "ppg_level": { "min": 60, "max": 90 },
+          "emotion": ["fatigue", "weight gain"],
+          "bmi": { "min": 18.5, "max": 29.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 2, "max": 5 }
+        },
+        "recommendation": "Take prescribed thyroid hormone replacement, maintain a healthy diet, and consult with an endocrinologist."
+      },
+      {
+        "name": "Bronchitis",
+        "conditions": {
+          "temperature": { "min": 98, "max": 100 },
+          "ppg_level": { "min": 60, "max": 90 },
+          "emotion": ["cough", "sputum production"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "high",
+          "pain_level": { "min": 2, "max": 5 }
+        },
+        "recommendation": "Avoid smoking, use cough medications, and consult with a healthcare provider."
+      },
+      {
+        "name": "Rheumatoid Arthritis",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 100 },
+          "emotion": ["joint pain", "morning stiffness"],
+          "bmi": { "min": 18.5, "max": 29.9 },
+          "frequency": "high",
+          "pain_level": { "min": 4, "max": 8 }
+        },
+        "recommendation": "Use anti-inflammatory medications, engage in physical therapy, and consult with a rheumatologist."
+      },
+      {
+        "name": "Irritable Bowel Syndrome (IBS)",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 90 },
+          "emotion": ["abdominal cramping", "diarrhea"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 2, "max": 5 }
+        },
+        "recommendation": "Manage stress, follow a low-FODMAP diet, and consult with a gastroenterologist."
+      },
+      {
+        "name": "Psoriasis",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 90 },
+          "emotion": ["itchy skin", "red patches"],
+          "bmi": { "min": 18.5, "max": 29.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 2, "max": 5 }
+        },
+        "recommendation": "Use topical treatments, avoid triggers, and consult with a dermatologist."
+      },
+      {
+        "name": "Anxiety Disorder",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 100 },
+          "emotion": ["excessive worry", "restlessness"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "high",
+          "pain_level": { "min": 1, "max": 3 }
+        },
+        "recommendation": "Practice relaxation techniques, seek therapy, and consult with a mental health professional."
+      },
+      {
+        "name": "Migraine",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 100 },
+          "emotion": ["severe headache", "nausea"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 6, "max": 10 }
+        },
+        "recommendation": "Avoid triggers, use prescribed medications, and consult with a healthcare provider."
+      },
+      {
+        "name": "Hypoglycemia",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 40, "max": 60 },
+          "emotion": ["dizziness", "shakiness"],
+          "bmi": { "min": 18.5, "max": 24.9 },
+          "frequency": "moderate",
+          "pain_level": { "min": 1, "max": 3 }
+        },
+        "recommendation": "Consume small, frequent meals with balanced carbohydrates, and consult with a healthcare provider."
+      },
+      {
+        "name": "Chronic Kidney Disease",
+        "conditions": {
+          "temperature": { "min": 97, "max": 99 },
+          "ppg_level": { "min": 60, "max": 100 },
+          "emotion": ["fatigue", "swelling"],
+          "bmi": { "min": 18.5, "max": 29.9 },
+          "frequency": "high",
+          "pain_level": { "min": 2, "max": 5 }
+        },
+        "recommendation": "Follow a kidney-friendly diet, monitor blood pressure, and consult with a nephrologist."
+      }
+    ]
+  }
+  
