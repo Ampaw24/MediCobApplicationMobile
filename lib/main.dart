@@ -28,8 +28,6 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (context) => FirebaseProvider()),
         ChangeNotifierProvider(create: (context) => VitalCheckProvider()),
         ChangeNotifierProvider(create: (context) => FetchHealthTipProvider()),
-        
-      
       ],
       child: const MyApp(), // Ensure MyApp is wrapped by MultiProvider
     ),

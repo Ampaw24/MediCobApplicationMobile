@@ -158,6 +158,8 @@ Widget PersonalFormWidget({
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: CustomTextFormField(
+                            textInputType:
+                                TextInputType.numberWithOptions(decimal: true),
                             autofocus: false,
                             hintText: "Height",
                             controller: heightController,
@@ -221,6 +223,8 @@ Widget PersonalFormWidget({
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: CustomTextFormField(
+                            textInputType:
+                                TextInputType.numberWithOptions(decimal: true),
                             autofocus: false,
                             hintText: "Weight",
                             controller: weightController,

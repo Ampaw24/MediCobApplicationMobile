@@ -143,6 +143,12 @@ Widget SymptomFormWidget({
                       child: Text(value),
                     );
                   }).toList(),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Select Symptom Type';
+                    }
+                    return null;
+                  },
                 ),
               ),
 
@@ -173,6 +179,13 @@ Widget SymptomFormWidget({
                             focusNode: levelFocusNode,
                             fillColor: WHITE,
                             hintStyle: subheaderText,
+                            textInputType: TextInputType.number,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please Select Pain Level';
+                              }
+                              return null;
+                            },
                             suffix: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -226,12 +239,19 @@ Widget SymptomFormWidget({
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: CustomTextFormField(
+                            textInputType: TextInputType.number,
                             autofocus: false,
                             hintText: "Pain Time",
                             controller: durationController,
                             focusNode: durationFocusNode,
                             fillColor: WHITE,
                             hintStyle: subheaderText,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'This Field Cannot be Empty';
+                              }
+                              return null;
+                            },
                             suffix: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -283,6 +303,7 @@ Widget SymptomFormWidget({
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: DropdownButtonFormField<String>(
+
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 10),
@@ -293,6 +314,12 @@ Widget SymptomFormWidget({
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
+                     validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'This Field Cannot be Empty';
+                              }
+                              return null;
+                            },
                   hint: Text(
                     'Select How Frequent.',
                     style: subheaderText,
@@ -329,6 +356,12 @@ Widget SymptomFormWidget({
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: DropdownButtonFormField<String>(
+                     validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'This Field Cannot be Empty';
+                              }
+                              return null;
+                            },
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 10),

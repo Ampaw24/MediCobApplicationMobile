@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newmedicob/core/app_export.dart';
@@ -11,11 +14,12 @@ import 'package:newmedicob/presentation/vital%20Check/temperature_check/provider
 import 'package:newmedicob/presentation/vital%20Check/temperature_check/temperature_page.dart';
 import 'package:newmedicob/presentation/vital%20Check/widget/infor_card_widget.dart';
 
-
 class VitalSignsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeChange = Provider.of<DarkThemeProvider>(context);
+  
+
     return Scaffold(
       backgroundColor: WHITE,
       appBar: AppBar(
@@ -82,7 +86,9 @@ class VitalSignsPage extends StatelessWidget {
                 child: button(
                     height: 60,
                     useGradient: true,
-                    onPressed: () {},
+                    onPressed: () {
+                      // readData();
+                    },
                     text: "Track",
                     textStyle: TextStyle(fontWeight: FontWeight.w600),
                     color: Colors.transparent,

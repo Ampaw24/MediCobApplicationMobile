@@ -11,6 +11,7 @@ import 'package:gap/gap.dart';
 import 'package:newmedicob/core/network/firebase_provider.dart';
 import 'package:newmedicob/core/textstyles.dart';
 import 'package:newmedicob/presentation/Homepage/provider/healthdata_fetch.dart';
+import 'package:newmedicob/presentation/diagnosis/personal_details.dart';
 import 'package:newmedicob/presentation/profile/provider/darktheme_provider.dart';
 import 'package:newmedicob/presentation/vital%20Check/BMI/main_screen.dart';
 import 'package:newmedicob/presentation/Homepage/model/usermodel.dart';
@@ -69,9 +70,8 @@ class _HomepageState extends State<Homepage> {
           splashColor: PRIMARYLIGHT.withOpacity(0.3),
           elevation: 4,
           backgroundColor: WHITE,
-          onPressed: () {
-            Get.to(transition: Transition.downToUp, DiagnosisLoaderPage());
-          },
+          onPressed: () => Get.to(
+              transition: Transition.downToUp, () => PersonalFormDiagnosis()),
           child: Image.asset(
             ImageConstant.robotLogo,
             fit: BoxFit.cover,
