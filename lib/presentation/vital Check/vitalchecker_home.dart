@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:newmedicob/core/app_export.dart';
@@ -75,7 +72,7 @@ class VitalSignsPage extends StatelessWidget {
                 child: InfoCard(
                   pageWidget: PPGApp(),
                   title: 'PPG',
-                  value: '${provider.ppg_value} bps',
+                  value: '${provider.ppg_value.toStringAsFixed(2)} bps',
                   icon: Icons.favorite,
                   fullWidth: true,
                 ),

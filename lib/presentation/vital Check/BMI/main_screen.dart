@@ -123,7 +123,9 @@ class _BMICheckerState extends State<BMIChecker> {
                     ],
                   ),
                   Slider(
-                    value: height.toDouble(),
+                    value: height
+                        .clamp(1, 220)
+                        .toDouble(), // Clamping the value between 1 and 220
                     min: 1,
                     max: 220,
                     activeColor: activeColor,
