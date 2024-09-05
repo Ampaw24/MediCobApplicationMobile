@@ -124,7 +124,7 @@ class _BMICheckerState extends State<BMIChecker> {
                   ),
                   Slider(
                     value: height.toDouble(),
-                    min: 1.47,
+                    min: 1,
                     max: 220,
                     activeColor: activeColor,
                     inactiveColor: inActiveColor,

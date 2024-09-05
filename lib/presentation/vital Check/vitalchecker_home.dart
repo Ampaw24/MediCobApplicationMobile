@@ -10,6 +10,7 @@ import 'package:newmedicob/core/image_constant.dart';
 import 'package:newmedicob/presentation/PPG@/ppg.dart';
 import 'package:newmedicob/presentation/profile/provider/darktheme_provider.dart';
 import 'package:newmedicob/presentation/vital%20Check/BMI/main_screen.dart';
+import 'package:newmedicob/presentation/vital%20Check/diagnosisclass.dart';
 import 'package:newmedicob/presentation/vital%20Check/temperature_check/provider/vital_check_provider.dart';
 import 'package:newmedicob/presentation/vital%20Check/temperature_check/temperature_page.dart';
 import 'package:newmedicob/presentation/vital%20Check/widget/infor_card_widget.dart';
@@ -18,8 +19,7 @@ class VitalSignsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeChange = Provider.of<DarkThemeProvider>(context);
-  
-
+    final diagnosisService = DiagnosisService();
     return Scaffold(
       backgroundColor: WHITE,
       appBar: AppBar(
@@ -87,7 +87,12 @@ class VitalSignsPage extends StatelessWidget {
                     height: 60,
                     useGradient: true,
                     onPressed: () {
-                      // readData();
+                      diagnosisService.fetchDiagnosesBasedOnParameters(
+                          maxPainLevel: 5,
+                          frequency: "moderate",
+                          temperature: provider.temperature_value,
+                          ppgMax: provider.ppg_value,
+                          emotions: ["pain", "discomfort"]);
                     },
                     text: "Track",
                     textStyle: TextStyle(fontWeight: FontWeight.w600),

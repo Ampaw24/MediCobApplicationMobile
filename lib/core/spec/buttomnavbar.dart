@@ -3,8 +3,8 @@ import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/core/colors.dart';
 import 'package:newmedicob/presentation/Homepage/homepage.dart';
 import 'package:newmedicob/presentation/profile/provider/darktheme_provider.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../../presentation/profile/profile_page.dart';
 import '../../presentation/records/recordspage.dart';
@@ -40,25 +40,14 @@ class BTNAV extends StatelessWidget {
       controller: PersistentTabController(initialIndex: 0),
       screens: _buildScreens(),
       items: _navBarItems,
-      confineInSafeArea: false,
       backgroundColor: themeChange.darkTheme ? PRIMARYCOLOR : WHITE,
       handleAndroidBackButtonPress: true,
-      padding: const NavBarPadding.all(15),
+      padding: const EdgeInsets.all(15),
       resizeToAvoidBottomInset: true,
       stateManagement: false,
-      hideNavigationBarWhenKeyboardShows: true,
+      hideNavigationBarWhenKeyboardAppears: true,
       decoration: NavBarDecoration(
         borderRadius: BorderRadius.circular(2.0),
-      ),
-      popAllScreensOnTapOfSelectedTab: true,
-      itemAnimationProperties: const ItemAnimationProperties(
-        duration: Duration(milliseconds: 50),
-        curve: Curves.easeOutBack,
-      ),
-      screenTransitionAnimation: const ScreenTransitionAnimation(
-        animateTabTransition: true,
-        curve: Curves.linear,
-        duration: Duration(milliseconds: 100),
       ),
       navBarHeight: 70,
       navBarStyle: NavBarStyle.style9,
