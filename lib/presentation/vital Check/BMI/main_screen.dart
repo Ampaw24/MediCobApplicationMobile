@@ -2,10 +2,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/core/colors.dart';
 import 'package:newmedicob/core/functions.dart';
 import 'package:newmedicob/presentation/Homepage/model/usermodel.dart';
+import 'package:newmedicob/presentation/vital%20Check/temperature_check/provider/vital_check_provider.dart';
 import 'container_box.dart';
 import 'data_container.dart';
 
@@ -52,20 +55,9 @@ class _BMICheckerState extends State<BMIChecker> {
     return bmi.toStringAsFixed(1);
   }
 
-  /* String getInterpretation(double bmi) {
-    if (bmi >= 25.0) {
-      return 'You have higher than normal body weight. Try to excersie more.';
-    } 
-    else if (bmi > 18.5) {
-      return 'You have a normal body weight. Good Job!';
-    } 
-    else {
-      return 'You have lower than normal body weight. You can eat a bit more.';
-    }
-  } */
-
   @override
   Widget build(BuildContext context) {
+    final bmiChecker = context.read<VitalCheckProvider>();
     return Scaffold(
       appBar: AppBar(
         title: Text("BMI Calculator"),
@@ -264,51 +256,23 @@ class _BMICheckerState extends State<BMIChecker> {
               onTap: () {
                 setState(() {
                   result = calculateBmi(weight, height);
-                  /*resultDetail = getInterpretation(bmi);*/
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext contest) {
-                        return Dialog(
-                            backgroundColor: inActiveColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            child: Container(
-                              color: inActiveColor,
-                              height: 200.0,
-                              margin: EdgeInsets.all(10.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    'Your BMI',
-                                    style: textStyle1,
-                                  ),
-                                  Text(
-                                    result.toString(),
-                                    style: textStyle2,
-                                  ),
-                                  /*Text(
-                                    resultDetail,
-                                    style: textStyle1,
-                                  ),*/
-                                ],
-                              ),
-                            ));
-                      });
                 });
+                bmiChecker.updateBmi(double.parse(result));
+                Get.snackbar("BMI", "Patient BMI $result added Successfully ",
+                    colorText: Colors.white, backgroundColor: Colors.green);
+                Navigator.pop(context);
               },
               child: Container(
+                width: double.infinity,
+                height: 80.0,
+                color: activeColor,
+                margin: EdgeInsets.only(top: 10.0),
                 child: Center(
                   child: Text(
                     'Calculate',
                     style: textStyle3,
                   ),
                 ),
-                width: double.infinity,
-                height: 80.0,
-                color: activeColor,
-                margin: EdgeInsets.only(top: 10.0),
               ))
         ],
       ),

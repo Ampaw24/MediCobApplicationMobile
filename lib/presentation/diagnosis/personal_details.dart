@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:newmedicob/core/app_export.dart';
+import 'package:newmedicob/core/colors.dart';
+import 'package:newmedicob/core/spec/buttomnavbar.dart';
 import 'package:newmedicob/presentation/diagnosis/provider/diagnosisprovider.dart';
 import 'package:newmedicob/presentation/diagnosis/symptomsform.dart';
 import 'package:newmedicob/presentation/diagnosis/widget/personalwidget_form.dart';
@@ -9,7 +13,6 @@ class PersonalFormDiagnosis extends StatefulWidget {
   const PersonalFormDiagnosis({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _PersonalFormDiagnosisState createState() => _PersonalFormDiagnosisState();
 }
 
@@ -49,6 +52,13 @@ class _PersonalFormDiagnosisState extends State {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor: WHITE,
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => Get.to(() => BTNAV()),
+            icon: Icon(Iconsax.close_circle),
+          ),
+        ),
         body: PersonalFormWidget(
             heightController: diagnosisProvider.heightController,
             weightController: diagnosisProvider.weightController,
@@ -74,7 +84,9 @@ class _PersonalFormDiagnosisState extends State {
   }
 
   void _onRegister() async {
-    Navigator.push(context,
-        CupertinoPageRoute(builder: (context) => SymptomsFormDiagnosis()));
+    if (_formKey.currentState!.validate()) {
+      Navigator.push(context,
+          CupertinoPageRoute(builder: (context) => SymptomsFormDiagnosis()));
+    }
   }
 }

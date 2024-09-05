@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:newmedicob/core/app_export.dart';
 import 'package:newmedicob/core/colors.dart';
 import 'package:newmedicob/presentation/Homepage/homepage.dart';
+import 'package:newmedicob/presentation/profile/provider/darktheme_provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -12,21 +14,22 @@ class BTNAV extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     List<PersistentBottomNavBarItem> _navBarItems = [
       PersistentBottomNavBarItem(
         icon: const Icon(
           Iconsax.home,
         ),
         title: "Home",
-        activeColorPrimary: PRIMARYLIGHT,
+        activeColorPrimary: themeChange.darkTheme ? WHITE : PRIMARYCOLOR,
       ),
       PersistentBottomNavBarItem(
-          activeColorPrimary: PRIMARYLIGHT,
+          activeColorPrimary: themeChange.darkTheme ? WHITE : PRIMARYCOLOR,
           icon: const Icon(Iconsax.note_2),
           title: "Records",
           textStyle: const TextStyle()),
       PersistentBottomNavBarItem(
-        activeColorPrimary: PRIMARYLIGHT,
+        activeColorPrimary: themeChange.darkTheme ? WHITE : PRIMARYCOLOR,
         icon: const Icon(Iconsax.profile_circle),
         title: "Profile",
       ),
@@ -38,7 +41,7 @@ class BTNAV extends StatelessWidget {
       screens: _buildScreens(),
       items: _navBarItems,
       confineInSafeArea: false,
-      backgroundColor: WHITE,
+      backgroundColor: themeChange.darkTheme ? PRIMARYCOLOR : WHITE,
       handleAndroidBackButtonPress: true,
       padding: const NavBarPadding.all(15),
       resizeToAvoidBottomInset: true,

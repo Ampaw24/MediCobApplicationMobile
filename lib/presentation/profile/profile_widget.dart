@@ -1,6 +1,9 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:newmedicob/core/app_export.dart';
+import 'package:newmedicob/core/colors.dart';
+import 'package:newmedicob/presentation/profile/provider/darktheme_provider.dart';
 
 class profilewidget extends StatelessWidget {
   final String userName;
@@ -27,6 +30,7 @@ class profilewidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 20),
       onTap: tap,
@@ -54,7 +58,9 @@ class profilewidget extends StatelessWidget {
           style: TextStyle(
               fontWeight: FontWeight.w300,
               fontSize: 12,
-              color: Color(0XFF1064E8).withOpacity(0.5)),
+              color: themeChange.darkTheme
+                  ? WHITE
+                  : Color(0XFF1064E8).withOpacity(0.5)),
         ),
       ),
     );
@@ -69,12 +75,14 @@ class profilewidgetIcon extends StatelessWidget {
   final bool isCircular;
   final bool isIcon;
   final Widget? icon;
+  final Widget? trail;
   void Function()? tap;
   profilewidgetIcon({
     Key? key,
     this.isCircular = false,
     this.tap,
     this.icon,
+    this.trail,
     required this.userName,
     required this.submessage,
     required this.color,
@@ -87,6 +95,7 @@ class profilewidgetIcon extends StatelessWidget {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 20),
       onTap: tap,
+      trailing: trail,
       leading: SizedBox(
           height: isIcon ? 30 : 55, width: isCircular ? 55 : 65, child: icon),
       title: Text(

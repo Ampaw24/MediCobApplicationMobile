@@ -70,7 +70,7 @@ class FirebaseProvider with ChangeNotifier {
   }) async {
     try {
       SharedPreferences sp = await SharedPreferences.getInstance();
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+       await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -144,8 +144,7 @@ Future<Map<String, dynamic>> FetchUserOutline(
     if (event.snapshot.value != null && event.snapshot.value is Map) {
       final courses = Map<String, dynamic>.from(event.snapshot.value as Map);
       user = UserModel.fromJson(courses);
-      print(user!.email);
-      return courses;
+         return courses;
     } else {
       throw Exception('Unexpected value format in database');
     }
