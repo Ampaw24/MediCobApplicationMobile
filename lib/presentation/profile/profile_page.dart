@@ -81,22 +81,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-            _buildSettingItem(
-              context,
-              title: "Notifications",
-              description: "Receive alerts and notices",
-              icon: Iconsax.notification,
-              color: Colors.purple,
-              onTap: () {},
-            ),
-            _buildSettingItem(
-              context,
-              title: "Reset Password",
-              description: "Change your account password",
-              icon: Iconsax.password_check,
-              color: Colors.blue,
-              onTap: () {},
-            ),
+            // _buildSettingItem(
+            //   context,
+            //   title: "Notifications",
+            //   description: "Receive alerts and notices",
+            //   icon: Iconsax.notification,
+            //   color: Colors.purple,
+            //   onTap: () {},
+            // ),
+
             _buildSettingItem(
               context,
               title: "Theme",

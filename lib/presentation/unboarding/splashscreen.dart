@@ -53,6 +53,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+           
             const SpinKitWave(
               color: Colors.white,
               duration: Duration(seconds: 2),
